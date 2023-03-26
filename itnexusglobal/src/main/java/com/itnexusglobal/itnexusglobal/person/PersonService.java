@@ -40,6 +40,9 @@ public class PersonService {
                 .map(person -> mapToDTO(person, new PersonDTO()))
                 .orElseThrow(NotFoundException::new);
     }
+    public Person findUserByEmail(final String email) {
+        return personRepository.findByEmail(email) ;
+    }
 
     public Long create(final PersonDTO personDTO) {
         final Person person = new Person();

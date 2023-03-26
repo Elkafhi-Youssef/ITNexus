@@ -8,5 +8,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     boolean existsByEmailIgnoreCase(String email);
 
     boolean existsByTelIgnoreCase(String tel);
+    Person findByEmail(String email);
 
 }
