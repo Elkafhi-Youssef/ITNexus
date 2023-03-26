@@ -36,7 +36,7 @@ public class PersonResource {
         return ResponseEntity.ok(personService.get(id));
     }
 
-    @PostMapping
+    @PostMapping("/register")
     @ApiResponse(responseCode = "201")
     public ResponseEntity<Long> createPerson(@RequestBody @Valid final PersonDTO personDTO) {
         return new ResponseEntity<>(personService.create(personDTO), HttpStatus.CREATED);

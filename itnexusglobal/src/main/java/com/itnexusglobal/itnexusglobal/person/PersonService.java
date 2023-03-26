@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -20,12 +21,16 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final RoleRepository roleRepository;
     private final WorkofferRepository workofferRepository;
+    private  final PasswordEncoder passwordEncoder;
+
 
     public PersonService(final PersonRepository personRepository,
-            final RoleRepository roleRepository, final WorkofferRepository workofferRepository) {
+            final RoleRepository roleRepository, final WorkofferRepository workofferRepository, final PasswordEncoder passwordEncoder) {
         this.personRepository = personRepository;
         this.roleRepository = roleRepository;
         this.workofferRepository = workofferRepository;
+        this.passwordEncoder = passwordEncoder;
+
     }
 
     public List<PersonDTO> findAll() {
@@ -45,6 +50,7 @@ public class PersonService {
     }
 
     public Long create(final PersonDTO personDTO) {
+        personDTO.setPassword(passwordEncoder.encode(personDTO.getPassword()));
         final Person person = new Person();
         mapToEntity(personDTO, person);
         return personRepository.save(person).getId();
