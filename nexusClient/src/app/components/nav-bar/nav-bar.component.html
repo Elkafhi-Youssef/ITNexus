@@ -1,0 +1,9 @@
+<p>nav-bar works!</p>
+<ul class="flex flex-row p-3">
+  <li>home </li>
+  <li>users </li>
+  <li>companies </li>
+  <li *ngIf="!loggedIn">login </li>
+  <li *ngIf="loggedIn" ><button (click)="logout()">logout</button> </li>
+<li><button (click)="test()">click here </button></li>
+</ul>
