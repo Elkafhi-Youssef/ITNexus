@@ -1,0 +1,99 @@
+@startuml
+
+class           User{
+-userId   : Integer
+-firstName : String
+-lastName : String
+-email    : String
+-adresse :String
+-password : String
+-image    :text
+-tel    :String
+-Linkein  :String
+-Github   :String
+{method} singin(auth):Boolean
+{method} singup(user):Boolean
+
+}
+class Role{
+-roleId : Integer
+-roleName : String
+}
+
+class Profile{
+-profileId : Integer
+-userId : Integer
+}
+class WorkOffer{
+-offerId : Integer
+-title : String
+-description : String
+-creationDate : Date
+
+}
+class  Company{
+-companyId : Integer
+-name : String
+-website : String
+-employees : Integer
+-creationDate : Date
+-Adresse : String
+-Logo : text
+-Description : text
+-Email : String
+-Tel : String
+-Linkedin : String
+}
+class           Experience{
+-expId   : Integer
+-expName : String
+-position     : String
+-startDate     : Date
+-endDate     : Date
+-description     :text
+
+}
+class           Education{
+-eduId   : Integer
+-eduName : String
+-startDate : Date
+-endDate   : Date
+}
+
+class           Project{
+-proId   : Integer
+-proTitle : Text
+-tech     : String[]
+-proRepo : String
+}
+class           Skills{
+-skillId   : Integer
+-skillType : Stiring
+-skillName : String
+}
+class           Language{
+-langId   : Integer
+-langName : String
+-langLevel : String
+}
+class           Hobbies{
+-hobId   : Integer
+-hobName : String
+}
+
+
+
+
+User "1" *--- "1" Profile : create
+WorkOffer "1" *--- "1" Company : hasCompany
+User "1" --- "1" Company : works for
+User "1" *--- "1" WorkOffer : create
+Role "1..*" *--- "1..*" User : create
+User "1..*" ---- "1..*" WorkOffer : apply
+Profile "1" *--- "1..*" Experience : have
+Profile "1" *--- "1..*" Education : have
+Profile "1" *--- "1..*" Skills : have
+Profile "1" *--- "1..*" Language : have
+Profile "1" *--- "1..*" Project : have
+Profile "1" *--- "1..*" Hobbies : have
+@enduml
