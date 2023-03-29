@@ -1,9 +1,123 @@
-<p>nav-bar works!</p>
-<ul class="flex flex-row p-3">
-  <li>home </li>
-  <li>users </li>
-  <li>companies </li>
-  <li *ngIf="!loggedIn">login </li>
-  <li *ngIf="loggedIn" ><button (click)="logout()">logout</button> </li>
-<li><button (click)="test()">click here </button></li>
-</ul>
+<!--<p>nav-bar works!</p>-->
+<!--<ul class="flex flex-row p-3">-->
+<!--  <li>home</li>-->
+<!--  <li>users</li>-->
+<!--  <li>companies</li>-->
+ <li *ngIf="!loggedIn">login</li>
+<!--  <li *ngIf="loggedIn">-->
+<!--    <button (click)="logout()">logout</button>-->
+<!--  </li>-->
+<!--  <li>-->
+<!--    <button (click)="test()">click here</button>-->
+<!--  </li>-->
+<!--</ul>-->
+
+<!-- Navbar with Tailwind CSS and PrimeNG -->
+<nav class=" fixed top-0 left-0 w-full bg-white  z-10 h-16" [ngClass]="{ 'bg-bgcolor': !isScrolled, 'bg-white': isScrolled }" >
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="#" class="flex items-center">
+          <img class="block lg:hidden h-8 w-auto" src="logo.png" alt="ITNexusGlobal">
+          <img class="hidden lg:block h-8 w-auto" src="logo.png" alt="ITNexusGlobal">
+        </a>
+      </div>
+
+      <!-- Nav items -->
+      <div class="hidden md:block">
+        <ul class="flex items-center space-x-4">
+          <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Home</a></li>
+          <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Offer</a>
+          </li>
+          <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Make
+            Profile</a></li>
+        </ul>
+      </div>
+
+      <!-- Image with dropdown menu -->
+      <div *ngIf="loggedIn" class="hidden md:block">
+        <div class="ml-4 flex items-center md:ml-6">
+          <div class="relative">
+            <button (click)="showPopup()"
+              class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out">
+              <img class="h-8 w-8 rounded-full" src="assets/img/profile.jpg" alt="">
+            </button>
+            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" [ngClass]="{'hidden md:hidden': !isPopupVisible}">
+              <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
+                   aria-labelledby="user-menu">
+                <a href="#" class="block px-4 py-2 text-sm  text-black hover:text-white hover:bg-btnColor" role="menuitem">Profile</a>
+                <a href="#" class="block px-4 py-2 text-sm  text-black hover:text-white hover:bg-btnColor" role="menuitem">Settings</a>
+                <a (click)="logout()" class="block px-4 py-2 text-sm  text-black hover:text-white hover:bg-btnColor cursor-pointer" role="menuitem">Sign out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!loggedIn" class="hidden md:block">
+        <ul class="flex items-center space-x-4">
+          <button>
+            <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Log In</a></li>
+          </button>
+          <button>
+            <li><a href="#" class=" text-white bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Sing Up</a></li>
+          </button>
+          
+          
+        </ul>
+      </div>
+
+      <!-- Mobile menu button (hidden on larger screens) -->
+      <div class="-mr-2 flex md:hidden">
+        <button (click)="showMenu()"
+          class="text-gray-500 hover:text-white focus:outline-none focus:text-white transition duration-150 ease-in-out"
+          aria-label="Open menu">
+          <svg class=" h-7 w-7 text-btnColor" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu (hidden on larger screens) -->
+  <div class=" bg-white" [ngClass]="{'hidden md:hidden': !isMenuVisible}">
+    <div class="px-2 pt-2 pb-3 sm:px-3">
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">Home</a>
+      <a href="#"
+         class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">Offer</a>
+      <a href="#"
+         class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">Make
+        Profile</a>
+        <a href="#"
+         class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">
+        LogIn</a>
+        <a href="#"
+         class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">SingUp</a>
+    </div>
+    <div *ngIf="loggedIn" class="pt-4 pb-3 border-t border-gray-700">
+      <div class="flex items-center px-5">
+        <div class="flex-shrink-0">
+          <img class="h-10 w-10 rounded-full" src="assets/img/profile.jpg" alt="">
+        </div>
+        <div class="ml-3">
+          <div class="text-base font-medium leading-none text-white">John Doe</div>
+          <div class="text-sm font-medium leading-none text-gray-400">johndoe@example.com</div>
+        </div>
+      </div>
+      <div class="mt-3 px-2"><a href="#"
+                                class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Profile</a>
+        <a href="#"
+           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Settings</a>
+        <button (click)="logout()"
+           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Sign
+          out</button>
+           
+        </div>
+    </div>
+  </div>
+</nav>
+
+
+
+
