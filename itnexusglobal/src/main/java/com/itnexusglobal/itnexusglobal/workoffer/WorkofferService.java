@@ -1,10 +1,10 @@
 package com.itnexusglobal.itnexusglobal.workoffer;
-
 import com.itnexusglobal.itnexusglobal.company.Company;
 import com.itnexusglobal.itnexusglobal.company.CompanyRepository;
 import com.itnexusglobal.itnexusglobal.person.Person;
 import com.itnexusglobal.itnexusglobal.person.PersonRepository;
 import com.itnexusglobal.itnexusglobal.util.NotFoundException;
+import java.security.Principal;
 import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -37,9 +37,12 @@ public class WorkofferService {
                 .orElseThrow(NotFoundException::new);
     }
 
-    public Long create(final WorkofferDTO workofferDTO) {
+    public Long create(final WorkofferDTO workofferDTO, Principal principal) {
         final Workoffer workoffer = new Workoffer();
         mapToEntity(workofferDTO, workoffer);
+        final Person person = personRepository.findByEmail(principal.getName());
+        workoffer.setRHworkofferId(person);
+        workoffer.setCompanyworkofferid(person.getCompany());
         return workofferRepository.save(workoffer).getWorkofferId();
     }
 

@@ -3,6 +3,8 @@ package com.itnexusglobal.itnexusglobal.company;
 import com.itnexusglobal.itnexusglobal.person.Person;
 import com.itnexusglobal.itnexusglobal.person.PersonRepository;
 import com.itnexusglobal.itnexusglobal.util.NotFoundException;
+
+import java.security.Principal;
 import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -33,9 +35,11 @@ public class CompanyService {
                 .orElseThrow(NotFoundException::new);
     }
 
-    public Long create(final CompanyDTO companyDTO) {
+    public Long create(final CompanyDTO companyDTO, Principal principal) {
         final Company company = new Company();
         mapToEntity(companyDTO, company);
+        final Person person = personRepository.findByEmail(principal.getName());
+        company.setCompanyPersonId(person);
         return companyRepository.save(company).getCompanyId();
     }
 

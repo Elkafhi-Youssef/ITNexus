@@ -1,11 +1,15 @@
 package com.itnexusglobal.itnexusglobal.company;
 
+import com.itnexusglobal.itnexusglobal.person.PersonRepository;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+
+import java.security.Principal;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyResource {
 
     private final CompanyService companyService;
+    private final PersonRepository personRepository;
 
-    public CompanyResource(final CompanyService companyService) {
+    public CompanyResource(final CompanyService companyService, PersonRepository personRepository) {
         this.companyService = companyService;
+        this.personRepository = personRepository;
     }
 
     @GetMapping
@@ -38,9 +44,11 @@ public class CompanyResource {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('SCOPE_RH')")
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<Long> createCompany(@RequestBody @Valid final CompanyDTO companyDTO) {
-        return new ResponseEntity<>(companyService.create(companyDTO), HttpStatus.CREATED);
+    public ResponseEntity<Long> createCompany(@RequestBody @Valid final CompanyDTO companyDTO,
+            Principal principal) {
+        return new ResponseEntity<>(companyService.create(companyDTO,principal), HttpStatus.CREATED);
     }
 
     @PutMapping("/{companyId}")

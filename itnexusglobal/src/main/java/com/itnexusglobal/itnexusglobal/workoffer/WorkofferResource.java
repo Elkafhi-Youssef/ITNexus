@@ -2,10 +2,13 @@ package com.itnexusglobal.itnexusglobal.workoffer;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+
+import java.security.Principal;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +41,11 @@ public class WorkofferResource {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('SCOPE_RH')")
     @ApiResponse(responseCode = "201")
     public ResponseEntity<Long> createWorkoffer(
-            @RequestBody @Valid final WorkofferDTO workofferDTO) {
-        return new ResponseEntity<>(workofferService.create(workofferDTO), HttpStatus.CREATED);
+            @RequestBody @Valid final WorkofferDTO workofferDTO, Principal principal) {
+        return new ResponseEntity<>(workofferService.create(workofferDTO,principal), HttpStatus.CREATED);
     }
 
     @PutMapping("/{workofferId}")

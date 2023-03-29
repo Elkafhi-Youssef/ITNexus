@@ -51,4 +51,6 @@ public class PersonDTO {
 
     private List<Long> workoffers;
 
+    private String role;
+
 }

@@ -51,9 +51,17 @@ public class PersonService {
 
     public Long create(final PersonDTO personDTO) {
         personDTO.setPassword(passwordEncoder.encode(personDTO.getPassword()));
-        final Person person = new Person();
-        mapToEntity(personDTO, person);
-        return personRepository.save(person).getId();
+        Role rhRole = null ;
+        if (personDTO.getRole().equals("RH")) {
+            rhRole = roleRepository.findRoleByRoleName("RH");
+            System.out.println("RH");
+        } else {
+            rhRole = roleRepository.findRoleByRoleName("DEV");
+        }
+        final Person newPerson = new Person();
+        mapToEntity(personDTO, newPerson);
+        newPerson.setPersonRoleRoles(Collections.singleton(rhRole));
+        return personRepository.save(newPerson).getId();
     }
 
     public void update(final Long id, final PersonDTO personDTO) {
