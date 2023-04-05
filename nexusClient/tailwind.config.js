@@ -4,7 +4,8 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: { width: {
+    extend: {
+      width: {
       '64': '16rem', // Change the width to the desired value
     },
       colors: {
@@ -12,6 +13,10 @@ module.exports = {
         'whiteColor' : '#FFFFFF',
         'btnColor' : '#3B82F6',
       },
+      backgroundImage: {
+        'hero-pattern': "url('https://www.itgholding.com/upl/big/slc_cover_img_7.jpg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      }
     },
   },
   plugins: [],

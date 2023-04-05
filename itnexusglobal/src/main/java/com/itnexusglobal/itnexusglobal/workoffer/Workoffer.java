@@ -66,7 +66,7 @@ public class Workoffer implements Serializable {
     private Set<Person> persons;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "r_hworkoffer_id_id", unique = true)
+    @JoinColumn(name = "r_hworkoffer_id_id")
     private Person rHworkofferId;
 
     @CreatedDate

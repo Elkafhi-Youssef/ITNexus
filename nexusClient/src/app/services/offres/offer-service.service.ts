@@ -10,7 +10,7 @@ const url = env.url;
 export class OffersServiceService {
 
   constructor(private http:HttpClient) { }
-  getAllOffers(){
-    return this.http.get<AppResponse>(`${url}/api/workoffers`);
+  getAllOffers(page: number, size: number){
+    return this.http.get<AppResponse>(`${url}/api/workoffers?page=${page}&size=${size}`);
   }
 }

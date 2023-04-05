@@ -1,10 +1,10 @@
 
   <div class="mx-auto max-w-7xl bg-white p-5 rounded-md md:mx-8">
     <div class="flex items-center mt-8 mb-4">
-      <img class="h-12 w-12 rounded-full mr-4" src="https://via.placeholder.com/48x48" alt="HR Image">
+      <img class="h-12 w-12 rounded-full mr-4" [src]="offer.rhworkofferId.image" alt="HR Image">
       <div>
         <h2 class="text-2xl font-bold">{{offer.rhworkofferId.firstName}} {{offer.rhworkofferId.lastName}} </h2>
-        <a href="https://www.linkedin.com/in/firstname-lastname/" class="text-blue-400 hover:text-blue-500">LinkedIn Profile</a>
+        <a  [href]="offer.rhworkofferId.linkedIn" class="text-blue-400 hover:text-blue-500">LinkedIn Profile</a>
       </div>
     </div>
     <h1 class="text-4xl font-bold mb-4">{{offer.offerTitle}}</h1>

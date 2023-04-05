@@ -1,0 +1,3 @@
+.ngx-ui-loader .ngx-ui-loader-inner::before {
+  border-top-color: #1876d1 !important;
+}

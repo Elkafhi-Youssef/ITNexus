@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {OffersServiceService} from "../../services/offres/offer-service.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
+import { PaginatorModule } from 'primeng/paginator';
 interface Offer {
-  id:number;
+id:number;
   image: string;
   firstName: string;
   lastName: string;
@@ -21,16 +22,30 @@ interface Offer {
 export class HomeComponent  implements OnInit{
   skills =['Angular', 'HTML', 'CSS', 'JavaScript', 'Spring Boot'];
 offerss!:any[];
+  first: number = 0; rows: number = 10;
   constructor(private router: Router,private offersService:OffersServiceService,private loaderService: NgxUiLoaderService) { }
 
   ngOnInit(): void {
-    this.loaderService.start();
-        this.offersService.getAllOffers().subscribe(res=>{
-          console.log(res.data)
-          this.offerss = res.data;
-          this.loaderService.stop();
+    // this.loaderService.start();
+        this.offersService.getAllOffers(0,2).subscribe(res=>{
+          console.log(res.data[0].content)
+          this.offerss = res.data[0].content;
+          // this.loaderService.stop();
         })
     }
+// { first: number; rows: number; }
+  onPageChange(event:any ) {
+    this.first = event.first/10;
+    this.rows = event.rows;
+
+    this.offersService.getAllOffers(this.first,2).subscribe(res=>{
+      console.log(res.data[0].content)
+      this.offerss = res.data[0].content;
+      // this.loaderService.stop();
+    })
+    console.log( this.first)
+    console.log(this.rows)
+  }
 
 goToOfferDetail(offer:any) {
   this.router.navigate(['/offerdetails', offer.workofferId]);

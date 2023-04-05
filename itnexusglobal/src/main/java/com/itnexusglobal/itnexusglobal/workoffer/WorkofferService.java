@@ -6,6 +6,9 @@ import com.itnexusglobal.itnexusglobal.person.PersonRepository;
 import com.itnexusglobal.itnexusglobal.util.NotFoundException;
 import java.security.Principal;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +33,10 @@ public class WorkofferService {
                 .map((workoffer) -> mapToDTO(workoffer, new WorkofferDTO()))
                 .toList();
     }
-
+    public Page<Workoffer> getAllOffers(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return workofferRepository.findAll(pageRequest);
+    }
     public WorkofferDTO get(final Long workofferId) {
         return workofferRepository.findById(workofferId)
                 .map(workoffer -> mapToDTO(workoffer, new WorkofferDTO()))
