@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(
     private http:HttpClient,
-    private router:Router,
+    
 
   ) { }
   login(email:string,password : string){

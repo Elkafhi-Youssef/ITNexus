@@ -57,6 +57,7 @@ export class NavBarComponent implements OnInit{
     this.localStorageService.remove("token")
     this.accountService.changeStatus(false);
     this.router.navigateByUrl("/")
+    this.isPopupVisible = false;
   }
   test(){
     this.authService.test()

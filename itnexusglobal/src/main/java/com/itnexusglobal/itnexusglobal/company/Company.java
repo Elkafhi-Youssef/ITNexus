@@ -1,5 +1,8 @@
 package com.itnexusglobal.itnexusglobal.company;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.itnexusglobal.itnexusglobal.person.Person;
 import com.itnexusglobal.itnexusglobal.workoffer.Workoffer;
 import jakarta.persistence.Column;
@@ -26,6 +29,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,  property = "companyId")
 public class Company {
 
     @Id
@@ -62,12 +66,12 @@ public class Company {
 
     @Column(nullable = false)
     private String linkedIn;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_person_id_id", unique = true)
     private Person companyPersonId;
-
-    @OneToMany(mappedBy = "companyworkofferid")
+    @JsonIgnore
+    @OneToMany(mappedBy = "companyworkofferid", fetch = FetchType.EAGER)
     private Set<Workoffer> workoffers;
 
     @CreatedDate

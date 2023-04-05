@@ -1,14 +1,8 @@
 package com.itnexusglobal.itnexusglobal.role;
 
 import com.itnexusglobal.itnexusglobal.person.Person;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+
 import java.time.OffsetDateTime;
 import java.util.Set;
 import lombok.Getter;
@@ -41,7 +35,7 @@ public class Role {
     @Column(nullable = false)
     private String roleName;
 
-    @ManyToMany(mappedBy = "personRoleRoles")
+    @ManyToMany(mappedBy = "personRoleRoles", fetch = FetchType.EAGER)
     private Set<Person> personRolePersons;
 
     @CreatedDate

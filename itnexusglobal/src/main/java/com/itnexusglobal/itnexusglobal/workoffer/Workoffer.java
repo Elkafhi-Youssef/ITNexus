@@ -1,5 +1,8 @@
 package com.itnexusglobal.itnexusglobal.workoffer;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.itnexusglobal.itnexusglobal.company.Company;
 import com.itnexusglobal.itnexusglobal.person.Person;
 import jakarta.persistence.Column;
@@ -14,6 +17,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import lombok.Getter;
@@ -27,7 +32,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Workoffer {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "workofferId")
+public class Workoffer implements Serializable {
 
     @Id
     @Column(nullable = false, updatable = false)
@@ -51,15 +57,15 @@ public class Workoffer {
 
     @Column(nullable = false)
     private String creationOfferDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "companyworkofferid_id")
     private Company companyworkofferid;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "workoffers")
     private Set<Person> persons;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "r_hworkoffer_id_id", unique = true)
     private Person rHworkofferId;
 

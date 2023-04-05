@@ -1,5 +1,8 @@
 package com.itnexusglobal.itnexusglobal.person;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.itnexusglobal.itnexusglobal.company.Company;
 import com.itnexusglobal.itnexusglobal.profile.Profile;
 import com.itnexusglobal.itnexusglobal.role.Role;
@@ -19,6 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,  property = "id")
 public class Person {
 
     @Id
@@ -62,6 +66,7 @@ public class Person {
     @Column
     private String github;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.EAGER)
     @JoinTable(
             name = "person_role",
@@ -72,16 +77,16 @@ public class Person {
 
     @OneToOne(
             mappedBy = "personProfileId",
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private Profile profilePerson;
 
     @OneToOne(
             mappedBy = "companyPersonId",
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private Company company;
-
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "person_workoffer",

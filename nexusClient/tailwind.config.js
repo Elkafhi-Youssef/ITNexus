@@ -4,7 +4,9 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {
+    extend: { width: {
+      '64': '16rem', // Change the width to the desired value
+    },
       colors: {
         'bgcolor': '#EDF5FF',
         'whiteColor' : '#FFFFFF',

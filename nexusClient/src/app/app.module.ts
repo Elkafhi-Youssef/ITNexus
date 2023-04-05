@@ -13,6 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { FooterComponent } from './components/footer/footer.component';
+import { OfferDetailsComponent } from './components/offer-details/offer-details.component';
+import { NgxUiLoaderModule } from "ngx-ui-loader";
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     HomeComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    OfferDetailsComponent,
+
   ],
     imports: [
         BrowserModule,
@@ -30,7 +36,8 @@ import { FooterComponent } from './components/footer/footer.component';
       HttpClientModule,
       BrowserAnimationsModule,
       ButtonModule,
-      PasswordModule
+      PasswordModule,
+      NgxUiLoaderModule,
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },

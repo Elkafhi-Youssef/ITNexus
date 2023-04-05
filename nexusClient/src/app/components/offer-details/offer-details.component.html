@@ -1,0 +1,32 @@
+
+  <div class="mx-auto max-w-7xl bg-white p-5 rounded-md md:mx-8">
+    <div class="flex items-center mt-8 mb-4">
+      <img class="h-12 w-12 rounded-full mr-4" src="https://via.placeholder.com/48x48" alt="HR Image">
+      <div>
+        <h2 class="text-2xl font-bold">{{offer.rhworkofferId.firstName}} {{offer.rhworkofferId.lastName}} </h2>
+        <a href="https://www.linkedin.com/in/firstname-lastname/" class="text-blue-400 hover:text-blue-500">LinkedIn Profile</a>
+      </div>
+    </div>
+    <h1 class="text-4xl font-bold mb-4">{{offer.offerTitle}}</h1>
+    <div class="flex items-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class=" h-4 w-4 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        <p class="text-lg">{{offer.creationOfferDate | date}}</p>
+      </div>
+    <p class="text-lg mb-4">{{offer.offerDescription}}</p>
+
+
+    <div class="mb-4">
+      <h2 class="text-xl font-bold">{{offer.companyworkofferid.comName }}</h2>
+      <div class="flex items-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        <p class="text-lg">{{offer.companyworkofferid.creationDate | date}}</p>
+      </div>
+      <p class="text-lg mb-4">{{offer.companyworkofferid.description}} </p>
+      <p class="text-lg">{{offer.companyworkofferid.address }}</p>
+      <p class="text-lg">{{offer.companyworkofferid.employiesNumber }} employees</p>
+    </div>
+  </div>

@@ -1,5 +1,7 @@
 package com.itnexusglobal.itnexusglobal.workoffer;
 
+import com.itnexusglobal.itnexusglobal.response.DataResponse;
+import com.itnexusglobal.itnexusglobal.response.Response;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
@@ -30,8 +32,9 @@ public class WorkofferResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<WorkofferDTO>> getAllWorkoffers() {
-        return ResponseEntity.ok(workofferService.findAll());
+    public DataResponse getAllWorkoffers() {
+        DataResponse response = new DataResponse("list of workoffers",200,workofferService.findAll());
+        return response;
     }
 
     @GetMapping("/{workofferId}")
@@ -43,9 +46,13 @@ public class WorkofferResource {
     @PostMapping
     @PreAuthorize("hasAuthority('SCOPE_RH')")
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<Long> createWorkoffer(
+    public Response createWorkoffer(
             @RequestBody @Valid final WorkofferDTO workofferDTO, Principal principal) {
-        return new ResponseEntity<>(workofferService.create(workofferDTO,principal), HttpStatus.CREATED);
+        Response response;
+        if (workofferService.create(workofferDTO,principal) > 0){
+            return response = new Response("workoffer created successfully",201);
+        }
+        return  response = new Response("workoffer doen't created successfully",422);
     }
 
     @PutMapping("/{workofferId}")

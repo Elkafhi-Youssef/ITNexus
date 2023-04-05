@@ -1,6 +1,9 @@
 package com.itnexusglobal.itnexusglobal.workoffer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.itnexusglobal.itnexusglobal.company.Company;
+import com.itnexusglobal.itnexusglobal.person.Person;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -25,9 +28,9 @@ public class WorkofferDTO {
     @Size(max = 255)
     private String creationOfferDate;
 
-    private Long companyworkofferid;
+    private Company companyworkofferid;
 
-    @JsonProperty("rHworkofferId")
-    private Long rHworkofferId;
+
+    private Person rHworkofferId;
 
 }

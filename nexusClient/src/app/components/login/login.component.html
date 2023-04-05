@@ -1,11 +1,11 @@
 
 <!-- login component  -->
 <div class="flex flex-col md:flex-row max-w-7xl mx-auto mt-32 border lg:border-btnColor rounded-md sm">
-  <div class="flex-1 bg-gray-100 flex justify-center items-center">
-    <div>
+  <div class="flex-1  flex justify-center items-center  bg-white">
+    <div class=" w-full    ">
       <p class=" h-9 text-center text-2xl text-btnColor font-extrabold">Login</p>
 
-    <form [formGroup]="loginForm"  class="bg-white p-10 rounded-lg shadow-md">
+    <form [formGroup]="loginForm"  class="bg-white p-10  w-full">
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="email">
           Email
@@ -17,7 +17,7 @@
           Password
         </label>
         <!-- <p-password class="w-full" id="password" formControlName="password"></p-password> -->
-        <p-password formControlName="password" [toggleMask]="true"></p-password>
+        <p-password  formControlName="password" [toggleMask]="true"  [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"  ></p-password>
       </div>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" (click)="login()">
         Sign In
@@ -25,7 +25,7 @@
     </form>
   </div>
   </div>
-  <div class="flex-1 bg-blue-500">
+  <div class="flex-1 ">
     <img class="h-full object-cover" src="assets/img/login.png" alt="Placeholder Image">
   </div>
 </div>
