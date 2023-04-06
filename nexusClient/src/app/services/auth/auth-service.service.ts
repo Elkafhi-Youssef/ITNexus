@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(
     private http:HttpClient,
-    
+
 
   ) { }
   login(email:string,password : string){
@@ -22,6 +22,22 @@ export class AuthService {
       }
     );
     return this.http.post<AuthResponse>(`${url}/api/token`,{email, password},{headers});
+  }
+  register(formData:any){
+    const headers = new HttpHeaders(
+      {
+        'Content-Type':'application/json'
+      }
+    );
+    console.log("checking data"+formData)
+    if (formData.role == true){
+      formData.role="RH"
+      console.log("checking data if role true",formData)
+    }else{
+      formData.role="DEV"
+      console.log("checking data if role false",formData)
+    }
+    return this.http.post<any>(`${url}/api/persons/register`, formData , {headers} )
   }
   test(){
 

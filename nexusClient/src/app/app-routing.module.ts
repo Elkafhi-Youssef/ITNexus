@@ -5,12 +5,14 @@ import {HomeComponent} from "./components/home/home.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {AfterAuthGuard} from "./guards/after-auth.guard";
 import { OfferDetailsComponent } from './components/offer-details/offer-details.component';
+import {RegisterComponent} from "./components/register/register.component";
 
 const routes: Routes = [
   {path:"",redirectTo:"/login",pathMatch:'full'},
   {path:"login", component:LoginComponent, canActivate: [AfterAuthGuard] },
   {path:"home",component:HomeComponent ,  canActivate: [AuthGuard]},
-  {path:"offerdetails/:id",component:OfferDetailsComponent}
+  {path:"offerdetails/:id",component:OfferDetailsComponent},
+  {path:"register",component:RegisterComponent,  canActivate: [AfterAuthGuard]}
 
 ];
 

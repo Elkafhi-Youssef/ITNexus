@@ -1,0 +1,42 @@
+<div class="max-w-7xl mx-auto">
+  <h1 class="text-2xl font-bold mb-4">Register</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="flex flex-col mb-4">
+      <label for="firstName" class="mb-2 font-bold">First Name</label>
+      <input type="text" id="firstName" formControlName="firstName" class="px-3 py-2 border rounded-md" />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="lastName" class="mb-2 font-bold">Last Name</label>
+      <input type="text" id="lastName" formControlName="lastName" class="px-3 py-2 border rounded-md" />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="email" class="mb-2 font-bold">Email</label>
+      <input type="email" id="email" formControlName="email" class="px-3 py-2 border rounded-md" />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="address" class="mb-2 font-bold">Address</label>
+      <textarea id="address" formControlName="address" class="px-3 py-2 border rounded-md"></textarea>
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="password" class="mb-2 font-bold">Password</label>
+      <input type="password" id="password" formControlName="password" class="px-3 py-2 border rounded-md" />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="image" class="mb-2 font-bold">Image URL</label>
+      <input type="text" id="image" formControlName="image" class="px-3 py-2 border rounded-md" />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="tel" class="mb-2 font-bold">Telephone</label>
+      <input type="tel" id="tel" formControlName="tel" class="px-3 py-2 border rounded-md" />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label for="role" class="mb-2 font-bold">Role</label>
+      <label class="flex items-center">
+<!--        <input type="checkbox" formControlName="role" class="form-checkbox mr-2" />-->
+        <p-inputSwitch formControlName="role"></p-inputSwitch>
+        <span>RH</span>
+      </label>
+    </div>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Register</button>
+  </form>
+</div>
