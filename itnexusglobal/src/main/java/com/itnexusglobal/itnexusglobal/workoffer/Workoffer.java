@@ -1,8 +1,6 @@
 package com.itnexusglobal.itnexusglobal.workoffer;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import com.itnexusglobal.itnexusglobal.company.Company;
 import com.itnexusglobal.itnexusglobal.person.Person;
 import jakarta.persistence.Column;
@@ -21,18 +19,21 @@ import jakarta.persistence.SequenceGenerator;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Set;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.transaction.annotation.Transactional;
 
 
+@Transactional
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "workofferId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "workofferId")
 public class Workoffer implements Serializable {
 
     @Id
@@ -57,7 +58,7 @@ public class Workoffer implements Serializable {
 
     @Column(nullable = false)
     private String creationOfferDate;
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "companyworkofferid_id")
     private Company companyworkofferid;
@@ -65,9 +66,10 @@ public class Workoffer implements Serializable {
     @ManyToMany(mappedBy = "workoffers")
     private Set<Person> persons;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "r_hworkoffer_id_id")
-    private Person rHworkofferId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "r_hperson_id")
+    private Person rHperson;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

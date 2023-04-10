@@ -1,0 +1,69 @@
+<div *ngIf="profile" class="max-w-7xl mx-auto bg-whiteColor p-8 rounded-md">
+  <!-- User information -->
+  <div class="flex items-center space-x-4">
+    <img [src]="profile.image" alt="{{ profile.firstName }} {{ profile.lastName }}" class="w-32 h-32 rounded-full shadow-lg" />
+    <div>
+      <h1 class="text-3xl font-bold">{{ profile.firstName }} {{ profile.lastName }}</h1>
+      <p class="text-gray-600">Email: {{ profile.email }}</p>
+      <p class="text-gray-600">Address: {{ profile.address }}</p>
+      <p class="text-gray-600">Phone: {{ profile.tel }}</p>
+      <p class="text-gray-600">LinkedIn: <a [href]="profile.linkedIn" target="_blank" class="text-blue-600">{{ profile.linkedIn }}</a></p>
+    </div>
+  </div>
+
+  <!-- Company information -->
+  <div *ngIf="profile.company" class="mt-8">
+    <h2 class="text-xl font-bold">Company Information</h2>
+    <p class="text-gray-600">Date of creation: {{ profile.company.dateCreated | date }}</p>
+    <p class="text-gray-600">Name: {{ profile.company.comName }}</p>
+    <p class="text-gray-600">Address: {{ profile.company.address }}</p>
+    <p class="text-gray-600">Description: {{ profile.company.description }}</p>
+    <p class="text-gray-600">Number of employees: {{ profile.company.employiesNumber }}</p>
+    <p class="text-gray-600">Website: <a [href]="profile.company.website" target="_blank" class="text-blue-600">company website</a></p>
+    <p class="text-gray-600">LinkedIn: <a [href]="profile.company.linkedIn" target="_blank" class="text-blue-600">company linkedIn</a></p>
+  </div>
+  <h2 class="text-3xl  mt-12 font-bold border-2 border-white border-b-blue-700">My offers </h2>
+  <ng-template #noOffers>
+    <div class=" w-full  h-40 flex justify-center items-center" >
+      <h1 class="text-3xl font-bold mb-4 text-center text-white -tracking-tighter text-black">No Offers right now</h1>
+    </div>
+  </ng-template>
+  <div  *ngIf="events?.length; else noOffers" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4">
+    <div  *ngFor="let offer of events" class="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer border-2 border-whiteColor border-l-btnColor " >
+      <div class="p-4">
+        <img [src]="offer.rhperson.image" class="w-16 h-16 rounded-full mx-auto mb-4">
+        <h2 class="text-xl font-bold text-center mb-2">{{ offer.offerTitle }}</h2>
+        <p class="text-gray-600 text-center mb-4">{{ offer.companyworkofferid.comName}} - {{ offer.creationOfferDate | date }}</p>
+        <p class="text-gray-700 mb-4 line-clamp-2">{{ truncateDescription(offer.offerDescription) }}</p>
+        <div class="flex flex-wrap">
+          <span *ngFor="let skill of skills" class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ skill }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  <div class="card">-->
+<!--    <p-timeline [value]="events" align="alternate" styleClass="customized-timeline">-->
+<!--      <ng-template pTemplate="marker" let-event>-->
+
+<!--      </ng-template>-->
+<!--      <ng-template pTemplate="content" let-event>-->
+<!--        <p-card [header]="event.offerTitle" [subheader]="event.dateCreated | date: 'dd/MM/yyyy': 'fr'">-->
+<!--&lt;!&ndash;          <img *ngIf="event.image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + event.image" [alt]="event.name" width="200" class="shadow-2" />&ndash;&gt;-->
+<!--          <p>{{event.offerDescription}}</p>-->
+<!--          <button pButton label="Read more" class="p-button-text"></button>-->
+<!--        </p-card>-->
+<!--      </ng-template>-->
+<!--    </p-timeline>-->
+<!--  </div>-->
+
+</div>
+
+  <!-- Offers -->
+<!--  <div class="mt-8">-->
+<!--    <h2 class="text-xl font-bold">Offers</h2>-->
+<!--    <div *ngFor="let offer of person.offers" class="mt-4">-->
+<!--      <h3 class="text-lg font-semibold">{{ offer.title }}</h3>-->
+<!--      <p>Created on: {{ offer.createDate | date }}</p>-->
+<!--      <p>Description: {{ offer.description }}</p>-->
+
+

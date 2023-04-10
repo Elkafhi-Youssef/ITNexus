@@ -7,7 +7,9 @@ import {LocalStorageService} from "../storage/local-storage.service";
 })
 export class AccountService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.localStorageService.isLogin());
+  private role = new BehaviorSubject<string>(this.localStorageService.getInfos())
   authStatus = this.isLoggedInSubject.asObservable();
+  roleUserConnected = this.role.asObservable();
   constructor( private localStorageService: LocalStorageService,) { }
   changeStatus(value: boolean){
     this.isLoggedInSubject.next(value);

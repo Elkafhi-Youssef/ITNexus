@@ -14,13 +14,19 @@ import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { FooterComponent } from './components/footer/footer.component';
 import { OfferDetailsComponent } from './components/offer-details/offer-details.component';
+import {CloudinaryModule} from '@cloudinary/ng';
+import { TimelineModule } from 'primeng/timeline';
 import { NgxUiLoaderModule,
   NgxUiLoaderConfig,
   NgxUiLoaderHttpModule,
   SPINNER,
   POSITION,
   PB_DIRECTION } from 'ngx-ui-loader';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { PaginatorModule } from 'primeng/paginator';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import {CardModule} from "primeng/card";
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsColor: '#1876d1',
   fgsPosition: POSITION.centerCenter,
@@ -40,22 +46,28 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NavBarComponent,
     FooterComponent,
     OfferDetailsComponent,
+    RegisterComponent,
+    ProfileComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-      HttpClientModule,
-      BrowserAnimationsModule,
-      ButtonModule,
-      PaginatorModule,
-      PasswordModule,
-      NgxUiLoaderModule,
-      NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-      NgxUiLoaderHttpModule.forRoot({ showForeground: true })
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+    CloudinaryModule,
+    PaginatorModule,
+    InputSwitchModule,
+    TimelineModule,
+    PasswordModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderHttpModule.forRoot({showForeground: true}),
+    CardModule
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
   ],

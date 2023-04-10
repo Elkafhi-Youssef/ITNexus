@@ -39,7 +39,7 @@ public class PersonService {
                 .map((person) -> mapToDTO(person, new PersonDTO()))
                 .toList();
     }
-
+    @Transactional
     public PersonDTO get(final Long id) {
         return personRepository.findById(id)
                 .map(person -> mapToDTO(person, new PersonDTO()))
@@ -86,11 +86,15 @@ public class PersonService {
         personDTO.setTel(person.getTel());
         personDTO.setLinkedIn(person.getLinkedIn());
         personDTO.setGithub(person.getGithub());
+        personDTO.setCompany(person.getCompany());
         personDTO.setPersonRoleRoles(person.getPersonRoleRoles() == null ? null : person.getPersonRoleRoles().stream()
                 .map(role -> role.getId())
                 .toList());
-        personDTO.setWorkoffers(person.getWorkoffers() == null ? null : person.getWorkoffers().stream()
-                .map(workoffer -> workoffer.getWorkofferId())
+//        personDTO.setWorkofferListOfRH(person.getWorkoffers() == null ? null : person.getWorkoffers().stream()
+//                .map(workoffer -> workoffer)
+//                .toList());
+        personDTO.setWorkofferListOfRH(person.getRHworkoffes() == null ? null : person.getRHworkoffes().stream()
+                .map(workoffer -> workoffer)
                 .toList());
         return personDTO;
     }
@@ -116,7 +120,7 @@ public class PersonService {
         if (workoffers.size() != (personDTO.getWorkoffers() == null ? 0 : personDTO.getWorkoffers().size())) {
             throw new NotFoundException("one of workoffers not found");
         }
-        person.setWorkoffers(workoffers.stream().collect(Collectors.toSet()));
+        person.setRHworkoffes(workoffers.stream().collect(Collectors.toSet()));
         return person;
     }
 

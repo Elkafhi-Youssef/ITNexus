@@ -1,5 +1,8 @@
 package com.itnexusglobal.itnexusglobal.person;
 
+import com.itnexusglobal.itnexusglobal.company.Company;
+import com.itnexusglobal.itnexusglobal.role.Role;
+import com.itnexusglobal.itnexusglobal.workoffer.Workoffer;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
@@ -46,11 +49,15 @@ public class PersonDTO {
 
     @Size(max = 255)
     private String github;
+    private Company company;
+    private List<Workoffer> workofferListOfRH;
 
     private List<Long> personRoleRoles;
 
     private List<Long> workoffers;
 
     private String role;
+
+
 
 }

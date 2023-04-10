@@ -47,7 +47,7 @@ public class WorkofferService {
         final Workoffer workoffer = new Workoffer();
         mapToEntity(workofferDTO, workoffer);
         final Person person = personRepository.findByEmail(principal.getName());
-        workoffer.setRHworkofferId(person);
+        workoffer.setRHperson(person);
         if (person.getCompany() != null) {
 
             workoffer.setCompanyworkofferid(person.getCompany());
@@ -75,7 +75,7 @@ public class WorkofferService {
         workofferDTO.setCreationOfferDate(workoffer.getCreationOfferDate());
         workofferDTO.setCompanyworkofferid(workoffer.getCompanyworkofferid() == null ? null : workoffer.getCompanyworkofferid());
 
-        workofferDTO.setRHworkofferId(workoffer.getRHworkofferId() == null ? null : workoffer.getRHworkofferId());
+        workofferDTO.setRHworkofferId(workoffer.getRHperson() == null ? null : workoffer.getRHperson());
         return workofferDTO;
     }
 
@@ -88,7 +88,7 @@ public class WorkofferService {
         workoffer.setCompanyworkofferid(companyworkofferid);
         final Person rHworkofferId = workofferDTO.getRHworkofferId() == null ? null : personRepository.findById(workofferDTO.getRHworkofferId().getId())
                 .orElseThrow(() -> new NotFoundException("rHworkofferId not found"));
-        workoffer.setRHworkofferId(rHworkofferId);
+        workoffer.setRHperson(rHworkofferId);
         return workoffer;
     }
 

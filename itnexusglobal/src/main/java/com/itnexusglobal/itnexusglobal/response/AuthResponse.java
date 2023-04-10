@@ -1,29 +1,28 @@
 package com.itnexusglobal.itnexusglobal.response;
 
-public class AuthResponse extends Response {
+public class AuthResponse {
     private String token;
+    private long id;
+    private String message;
+
 
     public AuthResponse() {
     }
 
-    //    public AuthResponse(String token) {
-//        this.token = token;
-//    }
     public AuthResponse(String mssage) {
-        super(mssage);
+        this.message = mssage;
     }
-    public AuthResponse(String message , Integer status){
-        super(message, status);
+    public AuthResponse(String message, Integer status) {
+        this.message = message;
     }
-
     public AuthResponse(String message, Integer status, String token) {
-        super(message, status);
+        this.message = message;
         this.token = token;
     }
-
-    public AuthResponse(String message, String token) {
-        super(message);
-        this.token = token;
+    public AuthResponse(String message, Long id, String jwtAccessToken) {
+        this.message = message;
+        this.id = id;
+        this.token = jwtAccessToken;
     }
 
     public String getToken() {
@@ -32,5 +31,13 @@ public class AuthResponse extends Response {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

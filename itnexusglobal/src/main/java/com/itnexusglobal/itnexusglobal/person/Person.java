@@ -1,8 +1,6 @@
 package com.itnexusglobal.itnexusglobal.person;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import com.itnexusglobal.itnexusglobal.company.Company;
 import com.itnexusglobal.itnexusglobal.profile.Profile;
 import com.itnexusglobal.itnexusglobal.role.Role;
@@ -16,13 +14,15 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.transaction.annotation.Transactional;
+
 
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,  property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Person {
 
     @Id
@@ -80,13 +80,13 @@ public class Person {
             fetch = FetchType.EAGER
     )
     private Profile profilePerson;
-
+    @JsonIgnore
     @OneToOne(
-            mappedBy = "companyPersonId",
-            fetch = FetchType.EAGER
+            mappedBy = "companyPersonId"
+
     )
     private Company company;
-    @JsonIgnore
+@JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "person_workoffer",
@@ -94,6 +94,10 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "workoffer_id")
     )
     private Set<Workoffer> workoffers;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "rHperson")
+    private Set<Workoffer> rHworkoffes;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

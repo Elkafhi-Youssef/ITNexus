@@ -19,8 +19,8 @@
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="#" class="flex items-center">
-          <img class="block lg:hidden h-8 w-auto" src="logo.png" alt="ITNexusGlobal">
-          <img class="hidden lg:block h-8 w-auto" src="logo.png" alt="ITNexusGlobal">
+          <img class="block lg:hidden  h-9 w-auto"  src="assets/img/itng.png" alt="ITNexusGlobal">
+          <img class="hidden lg:block h-9 w-auto"  src="assets/img/itng.png" alt="ITNexusGlobal">
         </a>
       </div>
 
@@ -30,8 +30,10 @@
           <li><a routerLink="/home" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Home</a></li>
           <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Offer</a>
           </li>
-          <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Make
+          <li><a routerLink="/profile" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Make
             Profile</a></li>
+          <li ><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">rh
+            </a></li>
         </ul>
       </div>
 
@@ -46,7 +48,7 @@
             <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" [ngClass]="{'hidden md:hidden': !isPopupVisible}">
               <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
                    aria-labelledby="user-menu">
-                <a href="#" class="block px-4 py-2 text-sm  text-black hover:text-white hover:bg-btnColor" role="menuitem">Profile</a>
+                <a routerLink="/profile" class="block px-4 py-2 text-sm  text-black hover:text-white hover:bg-btnColor" role="menuitem">Profile</a>
                 <a href="#" class="block px-4 py-2 text-sm  text-black hover:text-white hover:bg-btnColor" role="menuitem">Settings</a>
                 <a (click)="logout()" class="block px-4 py-2 text-sm  text-black hover:text-white hover:bg-btnColor cursor-pointer" role="menuitem">Sign out</a>
               </div>
@@ -60,7 +62,7 @@
             <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Log In</a></li>
           </button>
           <button>
-            <li><a href="#" class=" text-white bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Sing Up</a></li>
+            <li><a routerLink="/register" class=" text-white bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Sing Up</a></li>
           </button>
 
 
@@ -86,7 +88,7 @@
       <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">Home</a>
       <a href="#"
          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">Offer</a>
-      <a href="#"
+      <a routerLink="/profile"
          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-btnColor">Make
         Profile</a>
         <a href="#"
@@ -105,7 +107,7 @@
           <div class="text-sm font-medium leading-none text-gray-400">johndoe@example.com</div>
         </div>
       </div>
-      <div class="mt-3 px-2"><a href="#"
+      <div class="mt-3 px-2"><a routerLink="/profile"
                                 class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Profile</a>
         <a href="#"
            class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Settings</a>

@@ -11,7 +11,7 @@ public class Response {
 
     public Response(String message) {
         this.message = message;
-        this.status = 200;
+
     }
 
     public Response() {

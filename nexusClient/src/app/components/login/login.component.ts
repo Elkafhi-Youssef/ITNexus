@@ -30,14 +30,13 @@ export class LoginComponent {
     if(values.email && values.password){
       this.authService.login(values.email,values.password).subscribe(
         (res) => {
-          if(res.status == 200){
           this.accountService.changeStatus(true)
             this.localStorageService.set("token",res.token);
+            this.localStorageService.set("id",res.id);
             this.router.navigateByUrl('/home');
             console.log(res)
-          }else{
-            this.router.navigateByUrl('');
-          }
+          },error => {
+          this.router.navigateByUrl('');
         }
       )
     }

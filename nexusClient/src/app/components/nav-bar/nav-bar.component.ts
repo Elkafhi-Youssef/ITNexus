@@ -14,9 +14,9 @@ export class NavBarComponent implements OnInit{
   isPopupVisible = false;
   isMenuVisible  = false;
   isScrolled = false;
-  xihaja(){
-    console.log("hi");
-  }
+  public loggedIn: boolean = false;
+  public role ="";
+  public currentUser: any = null;
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 0;
@@ -36,13 +36,13 @@ export class NavBarComponent implements OnInit{
     }
   }
 
-  public loggedIn: boolean = false;
-  public currentUser: any = null;
+
   constructor(
     private authService:AuthService,
     private router: Router,
     private accountService : AccountService,
     private localStorageService : LocalStorageService,
+    private userRole:LocalStorageService
   ) {
   }
 
@@ -52,12 +52,20 @@ export class NavBarComponent implements OnInit{
       this.currentUser = this.localStorageService.getInfos();
 
   })
+    this.role =this.userRole.getInfos().scope;
+    // this.accountService.roleUserConnected.subscribe(res=>{
+    //   console.log("getting the role",res);
+    //   this.role = res;
+    // })
   }
   logout(){
     this.localStorageService.remove("token")
     this.accountService.changeStatus(false);
     this.router.navigateByUrl("/")
     this.isPopupVisible = false;
+  }
+  profile(){
+
   }
   test(){
     this.authService.test()

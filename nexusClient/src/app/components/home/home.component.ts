@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {OffersServiceService} from "../../services/offres/offer-service.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import { PaginatorModule } from 'primeng/paginator';
+import {LocalStorageService} from "../../services/storage/local-storage.service";
 interface Offer {
 id:number;
   image: string;
@@ -20,36 +21,56 @@ id:number;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent  implements OnInit{
+  totalElements!:number;
   skills =['Angular', 'HTML', 'CSS', 'JavaScript', 'Spring Boot'];
-offerss!:any[];
-  first: number = 0; rows: number = 10;
-  constructor(private router: Router,private offersService:OffersServiceService,private loaderService: NgxUiLoaderService) { }
+offerss:any[] | null= null;
+  first: number = 0; rows: number = 2;
+  constructor(private router: Router,private offersService:OffersServiceService,private loaderService: NgxUiLoaderService,private token:LocalStorageService) { }
 
   ngOnInit(): void {
     // this.loaderService.start();
         this.offersService.getAllOffers(0,2).subscribe(res=>{
-          console.log(res.data[0].content)
+          console.log(res.data[0].totalElements)
           this.offerss = res.data[0].content;
+          if (res.data[0].totalElements % 2 ==0){
+            this.totalElements = res.data[0].totalElements
+          }else{
+            this.totalElements = res.data[0].totalElements+1
+          }
+          console.log("hna", this.totalElements)
+
           // this.loaderService.stop();
         })
     }
 // { first: number; rows: number; }
   onPageChange(event:any ) {
-    this.first = event.first/10;
+    if (event.first >0 ){
+      this.first = event.first-1;
+    }else{
+      this.first = event.first;
+    }
+
     this.rows = event.rows;
 
     this.offersService.getAllOffers(this.first,2).subscribe(res=>{
-      console.log(res.data[0].content)
+      console.log(res.data[0].totalPages)
       this.offerss = res.data[0].content;
+      this.totalElements = res.data[0].totalElements
       // this.loaderService.stop();
     })
     console.log( this.first)
     console.log(this.rows)
   }
+  tokken(){
+    let token =this.token.getInfos().scope;
+    console.log(token)
+
+  }
 
 goToOfferDetail(offer:any) {
   this.router.navigate(['/offerdetails', offer.workofferId]);
 }
+
   truncateDescription(description: string): string {
     const maxLength = 150;
     if (description.length > maxLength) {

@@ -1,5 +1,6 @@
 package com.itnexusglobal.itnexusglobal.workoffer;
 
+import com.itnexusglobal.itnexusglobal.response.AuthResponse;
 import com.itnexusglobal.itnexusglobal.response.DataResponse;
 import com.itnexusglobal.itnexusglobal.response.Response;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,9 +26,9 @@ public class WorkofferResource {
     }
 
     @GetMapping
-    public DataResponse getAllWorkoffers(@RequestParam(value = "page",defaultValue = "0") int page, @RequestParam(value = "size",defaultValue = "2") int size) {
+    public ResponseEntity<DataResponse>  getAllWorkoffers(@RequestParam(value = "page",defaultValue = "0") int page, @RequestParam(value = "size",defaultValue = "2") int size) {
         DataResponse response = new DataResponse("list of workoffers",200,workofferService.getAllOffers(page,size));
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{workofferId}")
@@ -39,13 +40,13 @@ public class WorkofferResource {
     @PostMapping
     @PreAuthorize("hasAuthority('SCOPE_RH')")
     @ApiResponse(responseCode = "201")
-    public Response createWorkoffer(
+    public ResponseEntity<Response>  createWorkoffer(
             @RequestBody @Valid final WorkofferDTO workofferDTO, Principal principal) {
         Response response;
         if (workofferService.create(workofferDTO,principal) > 0){
-            return response = new Response("workoffer created successfully",201);
+            return ResponseEntity.ok(new Response("workoffer created successfully",201));
         }
-        return  response = new Response("workoffer doen't created successfully",422);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response("workoffer doen't created successfully",422));
     }
 
     @PutMapping("/{workofferId}")

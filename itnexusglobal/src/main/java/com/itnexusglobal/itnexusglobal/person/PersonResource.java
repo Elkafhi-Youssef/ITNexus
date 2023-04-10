@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class PersonResource {
     @PostMapping("/register")
     @ApiResponse(responseCode = "201")
     public ResponseEntity<Long> createPerson(@RequestBody @Valid final PersonDTO personDTO) {
+        System.out.println("check the tele of prson "+ personDTO.getTel());
         return new ResponseEntity<>(personService.create(personDTO), HttpStatus.CREATED);
     }
 
