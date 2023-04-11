@@ -9,6 +9,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 
 @Getter
 @Setter
@@ -29,6 +32,7 @@ public class WorkofferDTO {
     private String creationOfferDate;
 
     private Company companyworkofferid;
+    private Set<Person> applayers;
 
 
     private Person rHworkofferId;

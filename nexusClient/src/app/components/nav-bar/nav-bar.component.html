@@ -30,9 +30,9 @@
           <li><a routerLink="/home" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Home</a></li>
           <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Offer</a>
           </li>
-          <li><a routerLink="/profile" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Make
+          <li><a routerLink="/profile"  *ngIf="role == 'DEV' "  class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Make
             Profile</a></li>
-          <li ><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">rh
+          <li ><a href="#"class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">rh
             </a></li>
         </ul>
       </div>

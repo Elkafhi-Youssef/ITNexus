@@ -8,6 +8,9 @@ import com.itnexusglobal.itnexusglobal.workoffer.Workoffer;
 import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -66,7 +69,7 @@ public class Person {
     @Column
     private String github;
 
-    @JsonIgnore
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.EAGER)
     @JoinTable(
             name = "person_role",
@@ -87,13 +90,13 @@ public class Person {
     )
     private Company company;
 @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "person_workoffer",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "workoffer_id")
     )
-    private Set<Workoffer> workoffers;
+    private Set<Workoffer> workoffers = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "rHperson")

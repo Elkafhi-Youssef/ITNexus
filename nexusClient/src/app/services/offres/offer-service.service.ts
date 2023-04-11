@@ -13,4 +13,18 @@ export class OffersServiceService {
   getAllOffers(page: number, size: number){
     return this.http.get<AppResponse>(`${url}/api/workoffers?page=${page}&size=${size}`);
   }
+  getOfferById(id: string){
+    return this.http.get<any>(`${url}/api/workoffers/${id}`);
+  }
+  getApplayersOfOffers(id: string){
+    return this.http.get<any>(`${url}/api/workoffers/applayers/${id}`);
+  }
+  applyOffer(idOffer:number){
+    const headers = new HttpHeaders(
+      {
+        'Content-Type':'application/json'
+      }
+    );
+    return this.http.post<any>(`${url}/api/workoffers/applyOffer`,{"idoffer":idOffer},{headers});
+  }
 }

@@ -7,6 +7,7 @@ import {AfterAuthGuard} from "./guards/after-auth.guard";
 import { OfferDetailsComponent } from './components/offer-details/offer-details.component';
 import {RegisterComponent} from "./components/register/register.component";
 import {ProfileComponent} from "./components/profile/profile.component";
+import {ApplayersPesonsComponent} from "./components/applayers-pesons/applayers-pesons.component";
 
 const routes: Routes = [
   {path:"",redirectTo:"/login",pathMatch:'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:"home",component:HomeComponent ,  },
   {path:"offerdetails/:id",component:OfferDetailsComponent},
   {path:"register",component:RegisterComponent,  canActivate: [AfterAuthGuard]},
-  {path:"profile",component:ProfileComponent,  canActivate: [AuthGuard]}
+  {path:"profile",component:ProfileComponent,  canActivate: [AuthGuard]},
+  {path:"applayesoffer/:idoffer",component:ApplayersPesonsComponent,  canActivate: [AuthGuard]}
 
 ];
 

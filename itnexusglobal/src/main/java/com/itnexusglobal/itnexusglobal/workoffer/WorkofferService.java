@@ -6,6 +6,7 @@ import com.itnexusglobal.itnexusglobal.person.PersonRepository;
 import com.itnexusglobal.itnexusglobal.util.NotFoundException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,6 +43,23 @@ public class WorkofferService {
                 .map(workoffer -> mapToDTO(workoffer, new WorkofferDTO()))
                 .orElseThrow(NotFoundException::new);
     }
+    public List<Person> getApplayersOffer(final Long workofferId) {
+        return workofferRepository.findPersonsByOfferId(workofferId);
+
+    }
+    public Boolean applyOffer(Long offerId,Principal principal ) {
+        final Person person = personRepository.findByEmail(principal.getName());
+        Workoffer offer = workofferRepository.findById(offerId).orElseThrow(() -> new NotFoundException("Offer not found"));
+//        offer.getPersons().add(person);
+        person.getWorkoffers().add(offer);
+        Long id  = personRepository.save(person).getId();
+        if (id >0){
+            return true;
+        }else return false;
+
+    }
+
+
 
     public Long create(final WorkofferDTO workofferDTO, Principal principal) {
         final Workoffer workoffer = new Workoffer();
@@ -76,6 +94,9 @@ public class WorkofferService {
         workofferDTO.setCompanyworkofferid(workoffer.getCompanyworkofferid() == null ? null : workoffer.getCompanyworkofferid());
 
         workofferDTO.setRHworkofferId(workoffer.getRHperson() == null ? null : workoffer.getRHperson());
+//        workofferDTO.setApplayers(workoffer.getPersons() == null ? null : (Set<Person>) workoffer.getPersons().stream()
+//                .map(applayer -> applayer)
+//                .toList());
         return workofferDTO;
     }
 

@@ -25,6 +25,7 @@ export class HomeComponent  implements OnInit{
   skills =['Angular', 'HTML', 'CSS', 'JavaScript', 'Spring Boot'];
 offerss:any[] | null= null;
   first: number = 0; rows: number = 2;
+  private idPerson!: string;
   constructor(private router: Router,private offersService:OffersServiceService,private loaderService: NgxUiLoaderService,private token:LocalStorageService) { }
 
   ngOnInit(): void {
@@ -77,6 +78,17 @@ goToOfferDetail(offer:any) {
       return description.substring(0, maxLength) + '...';
     }
     return description;
+  }
+  apply(idOffer:number){
+    // @ts-ignore
+    this.idPerson = this.token.get("id")
+
+    this.offersService.applyOffer(idOffer).subscribe(
+      (res:any)=>{
+      console.log(res)
+    },(error:any) => {
+      console.error('Error applying offer:', error);
+    })
   }
 
   offers:any[] = [

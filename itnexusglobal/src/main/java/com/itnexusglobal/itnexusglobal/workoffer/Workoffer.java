@@ -18,6 +18,7 @@ import jakarta.persistence.SequenceGenerator;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import lombok.Getter;
@@ -63,8 +64,8 @@ public class Workoffer implements Serializable {
     @JoinColumn(name = "companyworkofferid_id")
     private Company companyworkofferid;
     @JsonIgnore
-    @ManyToMany(mappedBy = "workoffers")
-    private Set<Person> persons;
+    @ManyToMany(mappedBy = "workoffers", fetch = FetchType.EAGER)
+    private Set<Person> persons = new HashSet<>();
 
 
     @ManyToOne(fetch = FetchType.EAGER)

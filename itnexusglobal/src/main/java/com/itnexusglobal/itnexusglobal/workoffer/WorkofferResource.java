@@ -1,5 +1,6 @@
 package com.itnexusglobal.itnexusglobal.workoffer;
 
+import com.itnexusglobal.itnexusglobal.person.Person;
 import com.itnexusglobal.itnexusglobal.response.AuthResponse;
 import com.itnexusglobal.itnexusglobal.response.DataResponse;
 import com.itnexusglobal.itnexusglobal.response.Response;
@@ -30,11 +31,23 @@ public class WorkofferResource {
         DataResponse response = new DataResponse("list of workoffers",200,workofferService.getAllOffers(page,size));
         return ResponseEntity.ok(response);
     }
+    @PostMapping("/applyOffer")
+    public ResponseEntity<String> applyOffer( @RequestBody @Valid final Applay applay, Principal principal){
+        if (this.workofferService.applyOffer( applay.getIdoffer() , principal)){
+            return ResponseEntity.ok("success");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Authentication failed!");
+    }
 
     @GetMapping("/{workofferId}")
     public ResponseEntity<WorkofferDTO> getWorkoffer(
             @PathVariable(name = "workofferId") final Long workofferId) {
         return ResponseEntity.ok(workofferService.get(workofferId));
+    }
+    @GetMapping("/applayers/{workofferId}")
+    public ResponseEntity<List<Person>> getAllApplayers(
+            @PathVariable(name = "workofferId") final Long workofferId) {
+        return ResponseEntity.ok(workofferService.getApplayersOffer(workofferId));
     }
 
     @PostMapping

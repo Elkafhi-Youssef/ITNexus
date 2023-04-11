@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from "../../services/storage/local-storage.service";
 import {PersonsService} from "../../services/person/persons.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -13,13 +14,7 @@ export class ProfileComponent implements OnInit {
   profile:any | null = null;
   skills =['Angular', 'HTML', 'CSS', 'JavaScript', 'Spring Boot'];
 
-  constructor(private storage: LocalStorageService, private person: PersonsService) {
-    // this.events = [
-    //   { offerTitle: 'dev full stack', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
-    //   // { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
-    //   // { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
-    //   // { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
-    // ];
+  constructor(private storage: LocalStorageService, private person: PersonsService, private router :Router) {
   }
 
   ngOnInit(): void {
@@ -44,6 +39,10 @@ export class ProfileComponent implements OnInit {
       return description.substring(0, maxLength) + '...';
     }
     return description;
+  }
+
+  showAllApplayes(id: number){
+    this.router.navigate(['/applayesoffer/', id]);
   }
 
 

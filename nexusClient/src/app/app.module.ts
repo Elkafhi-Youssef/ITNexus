@@ -27,6 +27,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {CardModule} from "primeng/card";
+import { ApplayersPesonsComponent } from './components/applayers-pesons/applayers-pesons.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsColor: '#1876d1',
   fgsPosition: POSITION.centerCenter,
@@ -48,6 +49,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     OfferDetailsComponent,
     RegisterComponent,
     ProfileComponent,
+    ApplayersPesonsComponent,
 
   ],
   imports: [
