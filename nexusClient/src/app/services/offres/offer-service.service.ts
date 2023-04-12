@@ -27,4 +27,12 @@ export class OffersServiceService {
     );
     return this.http.post<any>(`${url}/api/workoffers/applyOffer`,{"idoffer":idOffer},{headers});
   }
+  addOffer(offerTitle:string,offerDescription:string){
+    const headers = new HttpHeaders(
+      {
+        'Content-Type':'application/json'
+      }
+    );
+    return this.http.post<any>(`${url}/api/workoffers`,{"offerTitle":offerTitle,"offerDescription":offerDescription},{headers});
+  }
 }

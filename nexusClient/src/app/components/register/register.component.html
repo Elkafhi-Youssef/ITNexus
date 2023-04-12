@@ -1,41 +1,116 @@
-<div class="max-w-7xl mx-auto">
-  <h1 class="text-2xl font-bold mb-4">Register</h1>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="flex flex-col mb-4">
-      <label for="firstName" class="mb-2 font-bold">First Name</label>
-      <input type="text" id="firstName" formControlName="firstName" class="px-3 py-2 border rounded-md" />
-    </div>
-    <div class="flex flex-col mb-4">
-      <label for="lastName" class="mb-2 font-bold">Last Name</label>
-      <input type="text" id="lastName" formControlName="lastName" class="px-3 py-2 border rounded-md" />
-    </div>
-    <div class="flex flex-col mb-4">
-      <label for="email" class="mb-2 font-bold">Email</label>
-      <input type="email" id="email" formControlName="email" class="px-3 py-2 border rounded-md" />
-    </div>
-    <div class="flex flex-col mb-4">
-      <label for="address" class="mb-2 font-bold">Address</label>
-      <textarea id="address" formControlName="address" class="px-3 py-2 border rounded-md"></textarea>
-    </div>
-    <div class="flex flex-col mb-4">
-      <label for="password" class="mb-2 font-bold">Password</label>
-      <input type="password" id="password" formControlName="password" class="px-3 py-2 border rounded-md" />
-    </div>
-    <div class="col-span-6 sm:col-span-3">
-      <label
-        for="image"
-        class="block text-sm font-medium text-gray-700"
-      >
-        Image
-      </label>
+<!--<div class="max-w-7xl mx-auto">-->
+<!--  <h1 class="text-2xl font-bold mb-4">Register</h1>-->
+<!--  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">-->
+<!--    <div class="flex flex-col mb-4">-->
+<!--      <label for="firstName" class="mb-2 font-bold">First Name</label>-->
+<!--      <input type="text" id="firstName" formControlName="firstName" class="px-3 py-2 border rounded-md" />-->
+<!--    </div>-->
+<!--    <div class="flex flex-col mb-4">-->
+<!--      <label for="lastName" class="mb-2 font-bold">Last Name</label>-->
+<!--      <input type="text" id="lastName" formControlName="lastName" class="px-3 py-2 border rounded-md" />-->
+<!--    </div>-->
+<!--    <div class="flex flex-col mb-4">-->
+<!--      <label for="email" class="mb-2 font-bold">Email</label>-->
+<!--      <input type="email" id="email" formControlName="email" class="px-3 py-2 border rounded-md" />-->
+<!--    </div>-->
+<!--    <div class="flex flex-col mb-4">-->
+<!--      <label for="address" class="mb-2 font-bold">Address</label>-->
+<!--      <textarea id="address" formControlName="address" class="px-3 py-2 border rounded-md"></textarea>-->
+<!--    </div>-->
+<!--    <div class="flex flex-col mb-4">-->
+<!--      <label for="password" class="mb-2 font-bold">Password</label>-->
+<!--      <input type="password" id="password" formControlName="password" class="px-3 py-2 border rounded-md" />-->
+<!--    </div>-->
+<!--    <div class="col-span-6 sm:col-span-3">-->
+<!--      <label-->
+<!--        for="image"-->
+<!--        class="block text-sm font-medium text-gray-700"-->
+<!--      >-->
+<!--        Image-->
+<!--      </label>-->
 
-      <input
-        type="file"
-        id="image"
-        name="image"
-        formControlName="image"
-        (change)="onFileChange($event)"
-        class="form-control
+<!--      <input-->
+<!--        type="file"-->
+<!--        id="image"-->
+<!--        name="image"-->
+<!--        formControlName="image"-->
+<!--        (change)="onFileChange($event)"-->
+<!--        class="form-control-->
+<!--                block-->
+<!--                w-full-->
+<!--                px-3-->
+<!--                py-1.5-->
+<!--                text-base-->
+<!--                font-normal-->
+<!--                text-gray-700-->
+<!--                bg-white bg-clip-padding-->
+<!--                border border-solid border-gray-300-->
+<!--                rounded-->
+<!--                transition-->
+<!--                ease-in-out-->
+<!--                m-0-->
+<!--                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none-->
+<!--                w-full rounded-lg border-primarybleu p-3 pr-12 text-sm shadow-sm bg-thirdbleu "-->
+
+<!--      />-->
+<!--      <span class=" text-red-500" *ngIf="!registerForm.get('image')?.valid && registerForm.get('image')?.touched " > please enter a valid image </span>-->
+<!--    </div>-->
+<!--    <div class="flex flex-col mb-4">-->
+<!--      <label for="tel" class="mb-2 font-bold">Telephone</label>-->
+<!--      <input type="tel" id="tel" formControlName="tel" class="px-3 py-2 border rounded-md" />-->
+<!--    </div>-->
+<!--    <div class="flex flex-col mb-4">-->
+<!--      <label for="role" class="mb-2 font-bold">Role</label>-->
+<!--      <label class="flex items-center">-->
+<!--&lt;!&ndash;        <input type="checkbox" formControlName="role" class="form-checkbox mr-2" />&ndash;&gt;-->
+<!--        <p-inputSwitch formControlName="role"></p-inputSwitch>-->
+<!--        <span>RH</span>-->
+<!--      </label>-->
+<!--    </div>-->
+<!--    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Register</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+<div class="flex flex-col md:flex-row max-w-7xl mx-auto  rounded-md sm">
+  <div class="flex-1  flex justify-center items-center  bg-white">
+    <div class=" w-full p-20 ">
+      <p class=" h-9 text-center text-2xl text-btnColor font-extrabold">Register Form</p>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="flex flex-col mb-4">
+          <label for="firstName" class="mb-2 font-bold">First Name</label>
+          <input type="text" id="firstName" formControlName="firstName" class="px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="lastName" class="mb-2 font-bold">Last Name</label>
+          <input type="text" id="lastName" formControlName="lastName" class="px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="email" class="mb-2 font-bold">Email</label>
+          <input type="email" id="email" formControlName="email" class="px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="address" class="mb-2 font-bold">Address</label>
+          <input id="address" type="text" placeholder="enter your address" formControlName="address" class="px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="password" class="mb-2 font-bold">Password</label>
+          <input type="password" id="password" formControlName="password" class="px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="image"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Image
+          </label>
+
+          <input
+            type="file"
+            id="image"
+            name="image"
+            formControlName="image"
+            (change)="onFileChange($event)"
+            class="form-control
                 block
                 w-full
                 px-3
@@ -52,21 +127,24 @@
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                 w-full rounded-lg border-primarybleu p-3 pr-12 text-sm shadow-sm bg-thirdbleu "
 
-      />
-      <span class=" text-red-500" *ngIf="!registerForm.get('image')?.valid && registerForm.get('image')?.touched " > please enter a valid image </span>
+          />
+          <span class=" text-red-500" *ngIf="!registerForm.get('image')?.valid && registerForm.get('image')?.touched " > please enter a valid image </span>
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="tel" class="mb-2 font-bold">Telephone</label>
+          <input type="tel" id="tel" formControlName="tel" class="px-3 py-2 border rounded-md" />
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="role" class="mb-2 font-bold">Role</label>
+          <label class="flex items-center">
+            <!--        <input type="checkbox" formControlName="role" class="form-checkbox mr-2" />-->
+            <p-inputSwitch formControlName="role"></p-inputSwitch>
+            <span>RH</span>
+          </label>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Register</button>
+      </form>
     </div>
-    <div class="flex flex-col mb-4">
-      <label for="tel" class="mb-2 font-bold">Telephone</label>
-      <input type="tel" id="tel" formControlName="tel" class="px-3 py-2 border rounded-md" />
-    </div>
-    <div class="flex flex-col mb-4">
-      <label for="role" class="mb-2 font-bold">Role</label>
-      <label class="flex items-center">
-<!--        <input type="checkbox" formControlName="role" class="form-checkbox mr-2" />-->
-        <p-inputSwitch formControlName="role"></p-inputSwitch>
-        <span>RH</span>
-      </label>
-    </div>
-    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Register</button>
-  </form>
+  </div>
+
 </div>

@@ -1,13 +1,81 @@
-<div *ngIf="profile" class="max-w-7xl mx-auto bg-whiteColor p-8 rounded-md">
+<div *ngIf="profile" class="max-w-7xl mx-auto bg-whiteColor p-8 rounded-md min-h-screen">
   <!-- User information -->
-  <div class="flex items-center space-x-4">
-    <img [src]="profile.image" alt="{{ profile.firstName }} {{ profile.lastName }}" class="w-32 h-32 rounded-full shadow-lg" />
+  <div class="flex items-center justify-between space-x-4">
+    <img [src]="profile.image" alt="{{ profile.firstName }} {{ profile.lastName }}"
+         class="w-64 h-64  rounded-md object-cover shadow-lg"/>
     <div>
       <h1 class="text-3xl font-bold">{{ profile.firstName }} {{ profile.lastName }}</h1>
-      <p class="text-gray-600">Email: {{ profile.email }}</p>
-      <p class="text-gray-600">Address: {{ profile.address }}</p>
-      <p class="text-gray-600">Phone: {{ profile.tel }}</p>
-      <p class="text-gray-600">LinkedIn: <a [href]="profile.linkedIn" target="_blank" class="text-blue-600">{{ profile.linkedIn }}</a></p>
+      <p class="text-gray-600">
+        <svg class="w-4 h-4 inline-block mr-2 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+        </svg>
+        {{ profile.email }}</p>
+      <p class="text-gray-600">
+        <svg class="w-4 h-4 inline-block mr-2 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+          <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+        </svg>
+        {{ profile.address }}</p>
+      <p class="text-gray-600">
+        <svg class="w-4 h-4 inline-block mr-2 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+          <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M80 0C44.7 0 16 28.7 16 64V448c0 35.3 28.7 64 64 64H304c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H80zm80 432h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+        </svg>
+        {{ profile.tel }}</p>
+      <p class="text-gray-600">
+
+        <a [href]="profile.linkedIn" target="_blank"
+           class="text-blue-600 flex ">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" w-6 h-6 mr-2">
+            <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+          </svg>
+          LinkedIn</a></p>
+    </div>
+    <div>
+      <button *ngIf="role == 'RH'" class=" mb-4 ml-5 text-white bg-[#11ABDB] hover:bg-btnColor px-4 py-2 rounded-md" (click)="showDialog()" > Add Offer</button>
+      <button *ngIf="role == 'RH'" class=" mb-4 ml-5 text-white bg-[#11ABDB] hover:bg-btnColor px-4 py-2 rounded-md"> Add Company</button>
+      <div class="card flex justify-content-center">
+        <p-dialog header="Add Offer" [(visible)]="visible" [style]="{width: '50vw'}">
+          <div>
+            <div class="flex-1  flex justify-center items-center  bg-white">
+              <div class=" w-full    ">
+                <p class=" h-9 text-center text-2xl text-btnColor font-extrabold">Add New Offer</p>
+
+                <form [formGroup]="offerForm" class="bg-white p-10  w-full">
+                  <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="offerTitle">
+                      Offer Title
+                    </label>
+                    <input
+                      class="form-input border-2 border-gray-200 p-2 w-full rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      type="text" id="offerTitle" formControlName="offerTitle">
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="offerDescription">
+                      Offer Descreption
+                    </label>
+                    <textarea
+                      class="form-input border-2 border-gray-200 p-2 w-full rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      type="text" id="offerDescription" formControlName="offerDescription">
+                    </textarea>
+                  </div>
+                  <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit" (click)="addOffer()">
+                    Add Offer
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </p-dialog>
+      </div>
     </div>
   </div>
 
@@ -19,52 +87,44 @@
     <p class="text-gray-600">Address: {{ profile.company.address }}</p>
     <p class="text-gray-600">Description: {{ profile.company.description }}</p>
     <p class="text-gray-600">Number of employees: {{ profile.company.employiesNumber }}</p>
-    <p class="text-gray-600">Website: <a [href]="profile.company.website" target="_blank" class="text-blue-600">company website</a></p>
-    <p class="text-gray-600">LinkedIn: <a [href]="profile.company.linkedIn" target="_blank" class="text-blue-600">company linkedIn</a></p>
+    <p class="text-gray-600">Website: <a [href]="profile.company.website" target="_blank" class="text-blue-600">company
+      website</a></p>
+    <p class="text-gray-600">LinkedIn: <a [href]="profile.company.linkedIn" target="_blank" class="text-blue-600">company
+      linkedIn</a></p>
   </div>
-  <h2 class="text-3xl  mt-12 font-bold border-2 border-white border-b-blue-700">My offers </h2>
-  <ng-template #noOffers>
-    <div class=" w-full  h-40 flex justify-center items-center" >
-      <h1 class="text-3xl font-bold mb-4 text-center text-white -tracking-tighter text-black">No Offers right now</h1>
-    </div>
-  </ng-template>
-  <div  *ngIf="events?.length; else noOffers" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4">
-    <div  *ngFor="let offer of events" class="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer border-2 border-whiteColor border-l-btnColor " >
-      <div class="p-4">
-<!--        <img [src]="offer.rhperson.image" class="w-16 h-16 rounded-full mx-auto mb-4">-->
-        <h2 class="text-xl font-bold text-center mb-2">{{ offer.offerTitle }}</h2>
-        <p class="text-gray-600 text-center mb-4">{{ offer.companyworkofferid.comName}} - {{ offer.creationOfferDate | date }}</p>
-        <p class="text-gray-700 mb-4 line-clamp-2">{{ truncateDescription(offer.offerDescription) }}</p>
-        <div class="flex flex-wrap">
-          <span *ngFor="let skill of skills" class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ skill }}</span>
-        </div>
+  <div *ngIf="role == 'RH'">
+    <h2 class="text-3xl  mt-12 font-bold border-2 border-white border-b-blue-700">My offers </h2>
+    <ng-template #noOffers>
+      <div class=" w-full  h-40 flex justify-center items-center">
+        <h1 class="text-3xl font-bold mb-4 text-center text-white -tracking-tighter text-black">No Offers right now</h1>
       </div>
-      <button  class=" mb-4 ml-5 bg-btnColor px-4 py-2 rounded-md" (click)="showAllApplayes(offer.workofferId)"> Show applyers</button>
+    </ng-template>
+
+    <div *ngIf="events?.length; else noOffers"
+         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4">
+      <div *ngFor="let offer of events"
+           class="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer border-2 border-whiteColor border-l-btnColor ">
+        <div class="p-4">
+          <!--        <img [src]="offer.rhperson.image" class="w-16 h-16 rounded-full mx-auto mb-4">-->
+          <h2 class="text-xl font-bold text-center mb-2">{{ offer.offerTitle }}</h2>
+          <p class="text-gray-600 text-center mb-4">{{ profile.company.comName }}
+            - {{ offer.dateCreated | date }}</p>
+          <p class="text-gray-700 mb-4 line-clamp-2">{{ truncateDescription(offer.offerDescription) }}</p>
+          <div class="flex flex-wrap">
+            <span *ngFor="let skill of skills"
+                  class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ skill }}</span>
+          </div>
+        </div>
+        <button class=" mb-4 ml-5 bg-btnColor px-4 py-2 rounded-md" (click)="showAllApplayes(offer.workofferId)"> Show
+          applyers
+        </button>
+      </div>
     </div>
   </div>
-<!--  <div class="card">-->
-<!--    <p-timeline [value]="events" align="alternate" styleClass="customized-timeline">-->
-<!--      <ng-template pTemplate="marker" let-event>-->
 
-<!--      </ng-template>-->
-<!--      <ng-template pTemplate="content" let-event>-->
-<!--        <p-card [header]="event.offerTitle" [subheader]="event.dateCreated | date: 'dd/MM/yyyy': 'fr'">-->
-<!--&lt;!&ndash;          <img *ngIf="event.image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + event.image" [alt]="event.name" width="200" class="shadow-2" />&ndash;&gt;-->
-<!--          <p>{{event.offerDescription}}</p>-->
-<!--          <button pButton label="Read more" class="p-button-text"></button>-->
-<!--        </p-card>-->
-<!--      </ng-template>-->
-<!--    </p-timeline>-->
-<!--  </div>-->
 
 </div>
 
-  <!-- Offers -->
-<!--  <div class="mt-8">-->
-<!--    <h2 class="text-xl font-bold">Offers</h2>-->
-<!--    <div *ngFor="let offer of person.offers" class="mt-4">-->
-<!--      <h3 class="text-lg font-semibold">{{ offer.title }}</h3>-->
-<!--      <p>Created on: {{ offer.createDate | date }}</p>-->
-<!--      <p>Description: {{ offer.description }}</p>-->
+
 
 

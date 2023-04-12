@@ -54,10 +54,6 @@ public class Company {
 
     @Column(nullable = false)
     private Long employiesNumber;
-
-    @Column(nullable = false)
-    private String creationDate;
-
     @Column(nullable = false)
     private String address;
 

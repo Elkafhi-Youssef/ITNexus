@@ -6,6 +6,8 @@ import {CloudinaryImage} from '@cloudinary/url-gen';
 import {fill} from '@cloudinary/url-gen/actions/resize'
 import {CloudinaryService} from "../../services/cloud/cloudinary.service";
 import {formatDate} from "@angular/common";
+import {NgToastService} from "ng-angular-popup";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,7 @@ export class RegisterComponent {
   registerForm!: FormGroup;
   imageUrl!: String;
   file!:File;
-  constructor(private formBuilder: FormBuilder, private register: AuthService, private uploadcdi:CloudinaryService ) { }
+  constructor(private formBuilder: FormBuilder, private register: AuthService, private uploadcdi:CloudinaryService,private toast:NgToastService, private router: Router ) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -43,10 +45,13 @@ export class RegisterComponent {
          console.log("show the content of image",this.imageUrl)
          this.register.register(formData).subscribe(
            response => {
-             console.log('User registered successfully');
+             this.router.navigateByUrl('/login');
+             this.toast.success({detail:'Success',summary:'User registered successfully', sticky:true,position:'tr',duration:3000})
+
            },
            error => {
-             console.error('Error registering user:', error);
+
+             this.toast.error({detail:'Error',summary:error, sticky:true,position:'tr',duration:3000})
            }
          );
        }

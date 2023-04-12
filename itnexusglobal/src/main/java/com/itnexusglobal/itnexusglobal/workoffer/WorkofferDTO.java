@@ -24,10 +24,8 @@ public class WorkofferDTO {
     private String offerTitle;
 
     @NotNull
-    @Size(max = 255)
     private String offerDescription;
 
-    @NotNull
     @Size(max = 255)
     private String creationOfferDate;
 

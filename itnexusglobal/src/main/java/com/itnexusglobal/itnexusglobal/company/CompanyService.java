@@ -59,7 +59,7 @@ public class CompanyService {
         companyDTO.setComName(company.getComName());
         companyDTO.setWebsite(company.getWebsite());
         companyDTO.setEmployiesNumber(company.getEmployiesNumber());
-        companyDTO.setCreationDate(company.getCreationDate());
+        companyDTO.setCreationDate(String.valueOf(company.getDateCreated()));
         companyDTO.setAddress(company.getAddress());
         companyDTO.setDescription(company.getDescription());
         companyDTO.setLinkedIn(company.getLinkedIn());
@@ -71,7 +71,6 @@ public class CompanyService {
         company.setComName(companyDTO.getComName());
         company.setWebsite(companyDTO.getWebsite());
         company.setEmployiesNumber(companyDTO.getEmployiesNumber());
-        company.setCreationDate(companyDTO.getCreationDate());
         company.setAddress(companyDTO.getAddress());
         company.setDescription(companyDTO.getDescription());
         company.setLinkedIn(companyDTO.getLinkedIn());

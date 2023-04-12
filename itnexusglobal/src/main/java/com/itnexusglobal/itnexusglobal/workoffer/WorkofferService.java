@@ -90,10 +90,10 @@ public class WorkofferService {
         workofferDTO.setWorkofferId(workoffer.getWorkofferId());
         workofferDTO.setOfferTitle(workoffer.getOfferTitle());
         workofferDTO.setOfferDescription(workoffer.getOfferDescription());
-        workofferDTO.setCreationOfferDate(workoffer.getCreationOfferDate());
+        workofferDTO.setCreationOfferDate(String.valueOf(workoffer.getDateCreated()));
         workofferDTO.setCompanyworkofferid(workoffer.getCompanyworkofferid() == null ? null : workoffer.getCompanyworkofferid());
-
-        workofferDTO.setRHworkofferId(workoffer.getRHperson() == null ? null : workoffer.getRHperson());
+        workofferDTO.setRHworkofferId(workoffer.getRHperson());
+//        workofferDTO.setRHworkofferId(workoffer.getRHperson() == null ? null : workoffer.getRHperson());
 //        workofferDTO.setApplayers(workoffer.getPersons() == null ? null : (Set<Person>) workoffer.getPersons().stream()
 //                .map(applayer -> applayer)
 //                .toList());
@@ -103,7 +103,6 @@ public class WorkofferService {
     private Workoffer mapToEntity(final WorkofferDTO workofferDTO, final Workoffer workoffer) {
         workoffer.setOfferTitle(workofferDTO.getOfferTitle());
         workoffer.setOfferDescription(workofferDTO.getOfferDescription());
-        workoffer.setCreationOfferDate(workofferDTO.getCreationOfferDate());
         final Company companyworkofferid = workofferDTO.getCompanyworkofferid() == null ? null : companyRepository.findById(workofferDTO.getCompanyworkofferid().getCompanyId())
                 .orElseThrow(() -> new NotFoundException("companyworkofferid not found"));
         workoffer.setCompanyworkofferid(companyworkofferid);

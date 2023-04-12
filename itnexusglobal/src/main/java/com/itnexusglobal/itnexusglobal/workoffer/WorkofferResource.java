@@ -53,13 +53,16 @@ public class WorkofferResource {
     @PostMapping
     @PreAuthorize("hasAuthority('SCOPE_RH')")
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<Response>  createWorkoffer(
+    public ResponseEntity<String>  createWorkoffer(
             @RequestBody @Valid final WorkofferDTO workofferDTO, Principal principal) {
+        System.out.println(workofferDTO.getOfferTitle());
+        System.out.println(workofferDTO.getOfferDescription());
         Response response;
         if (workofferService.create(workofferDTO,principal) > 0){
-            return ResponseEntity.ok(new Response("workoffer created successfully",201));
+            System.out.println("dazt hhhhhhhh");
+            return ResponseEntity.ok("the workoffer was successfully created");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response("workoffer doen't created successfully",422));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error creating workoffer");
     }
 
     @PutMapping("/{workofferId}")

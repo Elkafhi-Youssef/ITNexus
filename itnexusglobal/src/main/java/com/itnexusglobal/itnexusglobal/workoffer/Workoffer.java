@@ -57,8 +57,8 @@ public class Workoffer implements Serializable {
     @Column(nullable = false)
     private String offerDescription;
 
-    @Column(nullable = false)
-    private String creationOfferDate;
+//    @Column(nullable = false)
+//    private String creationOfferDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "companyworkofferid_id")

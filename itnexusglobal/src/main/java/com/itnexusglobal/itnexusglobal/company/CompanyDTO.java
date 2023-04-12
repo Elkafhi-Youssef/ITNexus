@@ -22,7 +22,6 @@ public class CompanyDTO {
     @NotNull
     private Long employiesNumber;
 
-    @NotNull
     @Size(max = 255)
     private String creationDate;
 

@@ -16,6 +16,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { OfferDetailsComponent } from './components/offer-details/offer-details.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { TimelineModule } from 'primeng/timeline';
+import {NgToastModule} from 'ng-angular-popup';
+import { DialogModule } from 'primeng/dialog';
 import { NgxUiLoaderModule,
   NgxUiLoaderConfig,
   NgxUiLoaderHttpModule,
@@ -52,7 +54,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ApplayersPesonsComponent,
 
   ],
-  imports: [
+  imports: [NgToastModule,
+    DialogModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

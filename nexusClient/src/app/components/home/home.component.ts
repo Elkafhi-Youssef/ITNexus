@@ -4,6 +4,7 @@ import {OffersServiceService} from "../../services/offres/offer-service.service"
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import { PaginatorModule } from 'primeng/paginator';
 import {LocalStorageService} from "../../services/storage/local-storage.service";
+import { NgToastService } from 'ng-angular-popup' ;
 interface Offer {
 id:number;
   image: string;
@@ -24,50 +25,50 @@ export class HomeComponent  implements OnInit{
   totalElements!:number;
   skills =['Angular', 'HTML', 'CSS', 'JavaScript', 'Spring Boot'];
 offerss:any[] | null= null;
-  first: number = 0; rows: number = 2;
+  first: number = 0; rows: number = 6;
   private idPerson!: string;
-  constructor(private router: Router,private offersService:OffersServiceService,private loaderService: NgxUiLoaderService,private token:LocalStorageService) { }
+  constructor(private router: Router,private offersService:OffersServiceService,private loaderService: NgxUiLoaderService,private token:LocalStorageService,private toast:NgToastService) { }
 
   ngOnInit(): void {
     // this.loaderService.start();
-        this.offersService.getAllOffers(0,2).subscribe(res=>{
-          console.log(res.data[0].totalElements)
+        this.offersService.getAllOffers(0,6).subscribe(res=>{
+          console.log("totalElements",res.data[0].totalElements)
           this.offerss = res.data[0].content;
-          if (res.data[0].totalElements % 2 ==0){
+          console.log("data offers", res.data[0].content)
+          if (res.data[0].totalElements< 6){
+            this.totalElements = 6
+          }else if (res.data[0].totalElements % 6 == 0){
             this.totalElements = res.data[0].totalElements
           }else{
             this.totalElements = res.data[0].totalElements+1
           }
-          console.log("hna", this.totalElements)
+          console.log("totalElements", this.totalElements)
 
           // this.loaderService.stop();
         })
     }
 // { first: number; rows: number; }
   onPageChange(event:any ) {
-    if (event.first >0 ){
-      this.first = event.first-1;
-    }else{
+    console.log( " first waht has",event.first)
+    if (event.first > 0 ){
+      this.first = (event.first)/6;
+    }else {
       this.first = event.first;
     }
+    console.log( " first waht has mni 5rjat",event.first)
 
     this.rows = event.rows;
 
-    this.offersService.getAllOffers(this.first,2).subscribe(res=>{
+    this.offersService.getAllOffers(this.first,6).subscribe(res=>{
       console.log(res.data[0].totalPages)
       this.offerss = res.data[0].content;
       this.totalElements = res.data[0].totalElements
+      console.log("total element", this.totalElements)
       // this.loaderService.stop();
     })
-    console.log( this.first)
-    console.log(this.rows)
+    console.log( " first waht has",this.first)
+    console.log("rows",this.rows)
   }
-  tokken(){
-    let token =this.token.getInfos().scope;
-    console.log(token)
-
-  }
-
 goToOfferDetail(offer:any) {
   this.router.navigate(['/offerdetails', offer.workofferId]);
 }
@@ -91,58 +92,6 @@ goToOfferDetail(offer:any) {
     })
   }
 
-  offers:any[] = [
-    {
-      id:1,
-      image: 'https://randomuser.me/api/portraits/women/10.jpg',
-      firstName: 'Jane',
-      lastName: 'Doe',
-      company: 'Acme Inc.',
-      date: new Date(),
-      title: 'FullStack Developer',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      skills: ['Angular', 'HTML', 'CSS', 'JavaScript', 'Spring Boot']
-    },
-    {
-      id:2,
-      image: 'https://randomuser.me/api/portraits/men/10.jpg',
-      firstName: 'John',
-      lastName: 'Doe',
-      company: 'XYZ Inc.',
-      date: new Date(),
-      title: 'Backend Developer',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      skills: ['Java', 'Spring Boot', 'SQL']
-    },{
-      id:3,
-      image: 'https://randomuser.me/api/portraits/men/10.jpg',
-      firstName: 'John',
-      lastName: 'Doe',
-      company: 'XYZ Inc.',
-      date: new Date(),
-      title: 'Backend Developer',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      skills: ['Java', 'Spring Boot', 'SQL']
-    },{id:4,
-      image: 'https://randomuser.me/api/portraits/men/10.jpg',
-      firstName: 'John',
-      lastName: 'Doe',
-      company: 'XYZ Inc.',
-      date: new Date(),
-      title: 'Backend Developer',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      skills: ['Java', 'Spring Boot', 'SQL']
-    },
-    {id:5,
-      image: 'https://randomuser.me/api/portraits/men/10.jpg',
-      firstName: 'John',
-      lastName: 'Doe',
-      company: 'XYZ Inc.',
-      date: new Date(),
-      title: 'Backend Developer',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      skills: ['Java', 'Spring Boot', 'SQL']
-    }
-  ];
+
 
 }

@@ -4,6 +4,7 @@ import {AuthService} from "../../services/auth/auth-service.service";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../../services/storage/local-storage.service";
 import {AccountService} from "../../services/account/account.service";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
     private authService: AuthService,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private accountService : AccountService
+    private accountService : AccountService,
+    private toast:NgToastService
   ) {
     this.loginForm = this.fb.group({
       email: ["youssef@gmail.com",[Validators.required,Validators.email]],
@@ -34,9 +36,12 @@ export class LoginComponent {
             this.localStorageService.set("token",res.token);
             this.localStorageService.set("id",res.id);
             this.router.navigateByUrl('/home');
+          this.toast.success({detail:'Success',summary:'Login successful', sticky:true,position:'tr',duration:3000})
             console.log(res)
           },error => {
           this.router.navigateByUrl('');
+          this.toast.error({detail:'Error',summary:"email or password incorrect", sticky:true,position:'tr',duration:3000})
+
         }
       )
     }
