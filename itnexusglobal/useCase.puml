@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+actor "DEV" as fc
+actor "RH" as fe
+rectangle ITNG {
+  usecase "Authetication" as UC1
+  usecase "Register" as UC2
+  usecase "Show offers" as UC3
+  usecase "Applay" as UC4
+  usecase "Add offer" as UC5
+}
+fc --> UC1
+fc --> UC2
+fc --> UC3
+fc --> UC4
+
+
+@enduml

@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.transaction.annotation.Transactional;
-
 
 
 @Entity
@@ -70,7 +72,7 @@ public class Person {
     private String github;
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "person_role",
             joinColumns = @JoinColumn(name = "person_id"),
@@ -89,8 +91,8 @@ public class Person {
 
     )
     private Company company;
-@JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "person_workoffer",
             joinColumns = @JoinColumn(name = "id"),

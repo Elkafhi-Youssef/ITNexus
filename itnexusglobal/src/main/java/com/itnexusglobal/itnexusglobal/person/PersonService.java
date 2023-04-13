@@ -6,10 +6,13 @@ import com.itnexusglobal.itnexusglobal.util.NotFoundException;
 import com.itnexusglobal.itnexusglobal.workoffer.Workoffer;
 import com.itnexusglobal.itnexusglobal.workoffer.WorkofferRepository;
 import jakarta.transaction.Transactional;
+
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +51,9 @@ public class PersonService {
     public Person findUserByEmail(final String email) {
         return personRepository.findByEmail(email) ;
     }
-
+    public Person getpersoninfo(Principal principal) {
+        return  personRepository.findByEmail(principal.getName());
+    }
     public Long create(final PersonDTO personDTO) {
         personDTO.setPassword(passwordEncoder.encode(personDTO.getPassword()));
         Role rhRole = null ;

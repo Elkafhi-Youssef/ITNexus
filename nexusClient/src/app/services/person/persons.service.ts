@@ -14,4 +14,7 @@ export class PersonsService {
   profile(id: string|null){
     return this.http.get<any>(`${url}/api/persons/${id}`)
   }
+  getInfoRersonLogin(){
+    return this.http.get<any>(`${url}/api/persons/getpersoninfo`)
+  }
 }

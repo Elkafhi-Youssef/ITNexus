@@ -18,6 +18,7 @@ import {CloudinaryModule} from '@cloudinary/ng';
 import { TimelineModule } from 'primeng/timeline';
 import {NgToastModule} from 'ng-angular-popup';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { NgxUiLoaderModule,
   NgxUiLoaderConfig,
   NgxUiLoaderHttpModule,
@@ -30,6 +31,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {CardModule} from "primeng/card";
 import { ApplayersPesonsComponent } from './components/applayers-pesons/applayers-pesons.component';
+import { DeleteOfferComponent } from './components/delete-offer/delete-offer.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsColor: '#1876d1',
   fgsPosition: POSITION.centerCenter,
@@ -52,6 +54,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     RegisterComponent,
     ProfileComponent,
     ApplayersPesonsComponent,
+    DeleteOfferComponent,
 
   ],
   imports: [NgToastModule,
@@ -62,6 +65,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ConfirmDialogModule,
     ButtonModule,
     CloudinaryModule,
     PaginatorModule,

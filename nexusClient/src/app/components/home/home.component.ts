@@ -30,7 +30,7 @@ offerss:any[] | null= null;
   constructor(private router: Router,private offersService:OffersServiceService,private loaderService: NgxUiLoaderService,private token:LocalStorageService,private toast:NgToastService) { }
 
   ngOnInit(): void {
-    // this.loaderService.start();
+    this.loaderService.start();
         this.offersService.getAllOffers(0,6).subscribe(res=>{
           console.log("totalElements",res.data[0].totalElements)
           this.offerss = res.data[0].content;
@@ -44,7 +44,7 @@ offerss:any[] | null= null;
           }
           console.log("totalElements", this.totalElements)
 
-          // this.loaderService.stop();
+          this.loaderService.stop();
         })
     }
 // { first: number; rows: number; }
@@ -83,12 +83,11 @@ goToOfferDetail(offer:any) {
   apply(idOffer:number){
     // @ts-ignore
     this.idPerson = this.token.get("id")
-
     this.offersService.applyOffer(idOffer).subscribe(
       (res:any)=>{
-      console.log(res)
+        this.toast.error({detail:'Error',summary:"error in applying", sticky:true,position:'tr',duration:3000})
     },(error:any) => {
-      console.error('Error applying offer:', error);
+        this.toast.success({detail:'Success',summary:'Applied successfully', sticky:true,position:'tr',duration:3000})
     })
   }
 

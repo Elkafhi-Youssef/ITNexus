@@ -19,32 +19,34 @@
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="#" class="flex items-center">
-          <img class="block lg:hidden  h-9 w-auto"  src="assets/img/itng.png" alt="ITNexusGlobal">
-          <img class="hidden lg:block h-9 w-auto"  src="assets/img/itng.png" alt="ITNexusGlobal">
+          <img class="block lg:hidden  h-16"  src="assets/img/itng.png" alt="ITNexusGlobal">
+          <img class="hidden lg:block h-16"  src="assets/img/itng.png" alt="ITNexusGlobal">
         </a>
       </div>
 
       <!-- Nav items -->
       <div class="hidden md:block">
         <ul class="flex items-center space-x-4">
-          <li><a routerLink="/home" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Home</a></li>
-          <li><a href="#" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Offer</a>
-          </li>
-          <li><a routerLink="/profile"  *ngIf="role == 'DEV' "  class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">Make
+          <li><a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"  class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-xl font-medium ">Home</a></li>
+          <li><a routerLink="/profile"  *ngIf="role == 'DEV' " routerLinkActive="active" class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-xl font-medium">Make
             Profile</a></li>
-          <li ><a href="#"class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-sm font-medium">rh
-            </a></li>
+          <li><a routerLink="/profile" routerLinkActive="active"   class=" text-black hover:text-white hover:bg-btnColor px-3 py-2 rounded-md text-xl font-medium">
+            Profile</a></li>
         </ul>
       </div>
 
       <!-- Image with dropdown menu -->
       <div *ngIf="loggedIn" class="hidden md:block">
         <div class="ml-4 flex items-center md:ml-6">
+          <p *ngIf="infoUser">{{infoUser.firstName}}</p>
+
           <div class="relative">
-            <button (click)="showPopup()"
+
+            <button (click)="showPopup()" *ngIf="infoUser"
               class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out">
-              <img class="h-8 w-8 rounded-full" src="assets/img/profile.jpg" alt="">
+              <img class="h-8 w-8 rounded-full" [src]="infoUser.image" alt="">
             </button>
+
             <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" [ngClass]="{'hidden md:hidden': !isPopupVisible}">
               <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
                    aria-labelledby="user-menu">

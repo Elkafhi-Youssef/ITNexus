@@ -13,7 +13,7 @@
   </div>
   <div *ngIf="applayers?.length; else noOffers"
        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4">
-    <div *ngFor="let applyer of applayers" class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div *ngFor="let applyer of applayers" class="bg-white rounded-lg shadow-md overflow-hidden w-72">
       <img [src]="applyer.image" alt="Profile picture" class="h-48 w-full object-fill">
       <div class="p-4 ">
         <h2 class="text-lg font-medium text-gray-800">{{ applyer.firstName }} {{ applyer.lastName }}</h2>

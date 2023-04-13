@@ -2,6 +2,8 @@ package com.itnexusglobal.itnexusglobal.person;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+
+import java.security.Principal;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,7 +33,10 @@ public class PersonResource {
     public ResponseEntity<List<PersonDTO>> getAllPersons() {
         return ResponseEntity.ok(personService.findAll());
     }
-
+    @GetMapping("/getpersoninfo")
+    public ResponseEntity<Person> getpersoninfo(  Principal principal) {
+        return ResponseEntity.ok(personService.getpersoninfo(principal));
+    }
     @GetMapping("/{id}")
     public ResponseEntity<PersonDTO> getPerson(@PathVariable(name = "id") final Long id) {
         return ResponseEntity.ok(personService.get(id));

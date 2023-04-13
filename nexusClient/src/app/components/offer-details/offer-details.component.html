@@ -1,6 +1,6 @@
 
-  <div class="mx-auto max-w-7xl bg-white p-5 rounded-md ">
-    <div class="flex items-center mt-8 mb-4">
+  <div *ngIf="offer" class="mx-auto max-w-7xl bg-white p-5 rounded-md ">
+    <div  class="flex items-center mt-8 mb-4">
       <img class="h-12 w-12 rounded-full mr-4" [src]="offer.rhworkofferId.image" alt="HR Image">
       <div>
         <h2 class="text-2xl font-bold">{{offer.rhworkofferId.firstName}} {{offer.rhworkofferId.lastName}} </h2>
@@ -23,10 +23,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
         </svg>
-        <p class="text-lg">{{offer.companyworkofferid.creationDate | date}}</p>
+        <p class="text-lg">{{offer.companyworkofferid.dateCreated | date}}</p>
       </div>
       <p class="text-lg mb-4">{{offer.companyworkofferid.description}} </p>
       <p class="text-lg">{{offer.companyworkofferid.address }}</p>
       <p class="text-lg">{{offer.companyworkofferid.employiesNumber }} employees</p>
     </div>
+    <button  class=" mb-4 ml-5 text-white bg-[#11ABDB] hover:bg-btnColor px-4 py-2 rounded-md" (click)="apply(offer.workofferId)"> Applay</button>
   </div>

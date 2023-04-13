@@ -35,7 +35,10 @@ export class LoginComponent {
           this.accountService.changeStatus(true)
             this.localStorageService.set("token",res.token);
             this.localStorageService.set("id",res.id);
-            this.router.navigateByUrl('/home');
+            window.location.reload();
+            setTimeout(()=>{
+              this.router.navigateByUrl('/home');
+            },100)
           this.toast.success({detail:'Success',summary:'Login successful', sticky:true,position:'tr',duration:3000})
             console.log(res)
           },error => {

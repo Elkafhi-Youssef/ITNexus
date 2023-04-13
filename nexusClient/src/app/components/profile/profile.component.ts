@@ -13,6 +13,8 @@ import {NgToastService} from "ng-angular-popup";
 })
 export class ProfileComponent implements OnInit {
   id!: string | null;
+  modelDeleteOffer:boolean = false
+  offerSelected:any
   events: any[] = [];
   offerForm!: FormGroup;
 
@@ -26,7 +28,7 @@ export class ProfileComponent implements OnInit {
 
   skills = ['Angular', 'HTML', 'CSS', 'JavaScript', 'Spring Boot'];
 
-  constructor(private storage: LocalStorageService, private person: PersonsService, private router: Router, private fb: FormBuilder, private offerService: OffersServiceService, private toast:NgToastService) {
+  constructor(private storage: LocalStorageService, private person: PersonsService, private router: Router, private fb: FormBuilder, private offerService: OffersServiceService, private toast: NgToastService) {
     this.offerForm = this.fb.group({
       offerTitle: ["", [Validators.required]],
       offerDescription: ["", [Validators.required]]
@@ -64,12 +66,32 @@ export class ProfileComponent implements OnInit {
   addOffer() {
     const values = this.offerForm.value;
     if (values.offerTitle && values.offerDescription) {
-      this.offerService.addOffer(values.offerTitle, values.offerDescription).subscribe(
-        (res: any) => {
+      this.offerService.addOffer(values.offerTitle, values.offerDescription).subscribe({
+        next: (res) => {
           console.log("added successful")
-          this.toast.error({detail:'Error',summary:"check that you have a company", sticky:true,position:'tr',duration:3000})
+          this.toast.error({
+            detail: 'Error',
+            summary: "check that you have a company",
+            sticky: true,
+            position: 'tr',
+            duration: 3000
+          });
           console.log(res)
-        }, error => {
+        },
+        error: error => {
+          console.log("added successful")
+          this.storage.get("id")
+          console.log(this.storage.get("id"))
+          this.id = this.storage.get("id")
+          this.person.profile(this.id).subscribe(
+            res => {
+              console.log("data", res)
+              this.profile = res;
+              this.events = res.workofferListOfRH
+            },
+            error => {
+              console.log("error")
+            })
           this.offerForm.reset();
           this.toast.success({
             detail: 'Success',
@@ -79,7 +101,7 @@ export class ProfileComponent implements OnInit {
             duration: 3000
           })
         }
-      );
+      });
 
 
     }
@@ -87,4 +109,10 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  toggleModelDeleteOffer(){
+    this.modelDeleteOffer =!this.modelDeleteOffer;
+  }
+
+
 }
+

@@ -33,6 +33,14 @@ export class OffersServiceService {
         'Content-Type':'application/json'
       }
     );
-    return this.http.post<any>(`${url}/api/workoffers`,{"offerTitle":offerTitle,"offerDescription":offerDescription},{headers});
+    return this.http.post<string>(`${url}/api/workoffers`,{"offerTitle":offerTitle,"offerDescription":offerDescription},{headers});
+  }
+  deleteOffer(idOffer:number){
+    const headers = new HttpHeaders(
+      {
+        'Content-Type':'application/json'
+      }
+    );
+    return this.http.delete(`${url}/api/workoffers/${idOffer}`,{headers})
   }
 }

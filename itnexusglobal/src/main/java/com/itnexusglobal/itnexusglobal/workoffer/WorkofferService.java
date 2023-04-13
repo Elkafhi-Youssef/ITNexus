@@ -83,6 +83,7 @@ public class WorkofferService {
     }
 
     public void delete(final Long workofferId) {
+        System.out.println(workofferId);
         workofferRepository.deleteById(workofferId);
     }
 

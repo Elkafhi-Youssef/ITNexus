@@ -60,15 +60,15 @@ public class Workoffer implements Serializable {
 //    @Column(nullable = false)
 //    private String creationOfferDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "companyworkofferid_id")
     private Company companyworkofferid;
     @JsonIgnore
-    @ManyToMany(mappedBy = "workoffers", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "workoffers")
     private Set<Person> persons = new HashSet<>();
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "r_hperson_id")
     private Person rHperson;
 

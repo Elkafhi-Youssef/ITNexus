@@ -3,6 +3,7 @@ import {AccountService} from "../../services/account/account.service";
 import {LocalStorageService} from "../../services/storage/local-storage.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth-service.service";
+import {PersonsService} from "../../services/person/persons.service";
 
 
 @Component({
@@ -16,6 +17,7 @@ export class NavBarComponent implements OnInit{
   isScrolled = false;
   public loggedIn: boolean = false;
   public role ="";
+  infoUser:any|null
   public currentUser: any = null;
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -42,7 +44,8 @@ export class NavBarComponent implements OnInit{
     private router: Router,
     private accountService : AccountService,
     private localStorageService : LocalStorageService,
-    private userRole:LocalStorageService
+    private userRole:LocalStorageService,
+    private  personService:PersonsService
   ) {
   }
 
@@ -57,6 +60,13 @@ export class NavBarComponent implements OnInit{
     //   console.log("getting the role",res);
     //   this.role = res;
     // })
+    this.isMenuVisible = false;
+    this.personService.getInfoRersonLogin().subscribe({
+      next: (res)=>{
+        this.infoUser = res
+        console.log(res,"info user")
+      }
+    })
   }
   logout(){
     this.localStorageService.remove("token")
