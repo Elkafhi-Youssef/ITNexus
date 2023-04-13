@@ -22,7 +22,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Transactional
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
@@ -91,14 +91,14 @@ public class Person {
 
     )
     private Company company;
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "person_workoffer",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "workoffer_id")
     )
-    private Set<Workoffer> workoffers = new HashSet<>();
+    private Set<Workoffer> workoffers ;
 
     @JsonIgnore
     @OneToMany(mappedBy = "rHperson")

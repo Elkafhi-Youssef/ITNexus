@@ -49,13 +49,16 @@ public class WorkofferService {
     }
     public Boolean applyOffer(Long offerId,Principal principal ) {
         final Person person = personRepository.findByEmail(principal.getName());
-        Workoffer offer = workofferRepository.findById(offerId).orElseThrow(() -> new NotFoundException("Offer not found"));
+        if (person != null){
+            Workoffer offer = workofferRepository.findById(offerId).orElseThrow(() -> new NotFoundException("Offer not found"));
 //        offer.getPersons().add(person);
-        person.getWorkoffers().add(offer);
-        Long id  = personRepository.save(person).getId();
-        if (id >0){
-            return true;
-        }else return false;
+            person.getWorkoffers().add(offer);
+            Long id  = personRepository.save(person).getId();
+            if (id >0){
+                return true;
+            }else return false;
+        }
+       return false;
 
     }
 

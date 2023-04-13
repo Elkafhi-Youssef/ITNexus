@@ -64,7 +64,7 @@ public class Workoffer implements Serializable {
     @JoinColumn(name = "companyworkofferid_id")
     private Company companyworkofferid;
     @JsonIgnore
-    @ManyToMany(mappedBy = "workoffers")
+    @ManyToMany(mappedBy = "workoffers" ,fetch = FetchType.EAGER)
     private Set<Person> persons = new HashSet<>();
 
 
